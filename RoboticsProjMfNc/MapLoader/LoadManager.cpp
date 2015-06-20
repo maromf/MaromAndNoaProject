@@ -7,6 +7,7 @@
 
 #include "lodepng.h"
 #include <iostream>
+#include "../ConfigManager.h"
 
 using namespace std;
 
@@ -40,7 +41,8 @@ void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned
 
 int** generateImgGrid()
 {
-	loadImage(ConfigManager::_instance->getMapPath());
+	loadImage(ConfigManager::Instance()->getMapPath());
+	//loadImage("parameters.txt");
 	int** grid = new int*[height];
 	for(int h = 0; h < height; h++)
 	{

@@ -26,7 +26,7 @@ public:
 	double getGridResulotionCM();
 
 private:
-	ConfigManager() {}
+	ConfigManager(){}
 	static ConfigManager *_instance;
 	const char* CONFIG_PATH = "\parameters.txt";
 	char* _mapPath;
