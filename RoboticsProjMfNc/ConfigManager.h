@@ -2,7 +2,7 @@
  * ConfigManager.h
  *
  *  Created on: Jun 19, 2015
- *      Author: colman
+ *      Author: Noa
  */
 
 #ifndef CONFIGMANAGER_H_

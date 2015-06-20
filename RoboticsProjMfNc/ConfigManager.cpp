@@ -2,7 +2,7 @@
  * ConfigManager.cpp
  *
  *  Created on: Jun 19, 2015
- *      Author: colman
+ *      Author: Noa
  */
 
 #include "ConfigManager.h"

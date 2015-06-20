@@ -5,84 +5,89 @@
  *      Author: colman
  */
 
-#include "lodepng.h"
-#include <iostream>
-#include "../ConfigManager.h"
+#include "LoadManager.h"
 
-using namespace std;
-
-std::vector<unsigned char> image; //the raw pixels
-unsigned width, height;
-
-//Example 1
-//Decode from disk to raw pixels with a single function call
-void loadImage(const char* filename)
+namespace MNProj
 {
-  //decode
-  unsigned error = lodepng::decode(image, width, height, filename);
-
-  //if there's an error, display it
-  if(error) std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
-
-  //the pixels are now in the vector "image", 4 bytes per pixel, ordered RGBARGBA..., use it as texture, draw it, ...
-}
-
-//Example 1
-//Encode from raw pixels to disk with a single function call
-//The image argument has width * height RGBA pixels or width * height * 4 bytes
-void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height)
-{
-  //Encode the image
-  unsigned error = lodepng::encode(filename, image, width, height);
-
-  //if there's an error, display it
-  if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
-}
-
-int** generateImgGrid()
-{
-	loadImage(ConfigManager::Instance()->getMapPath());
-	//loadImage("parameters.txt");
-	int** grid = new int*[height];
-	for(int h = 0; h < height; h++)
+	LoadManager::LoadManager()
 	{
-		grid[h] = new int[width];
-		for (int w = 0; w < width; w++)
+		IMAGE_PIXLE_COLUMNS = 0;
+		IMAGE_PIXLE_ROWS = 0;
+	}
+
+	//Example 1
+	//Decode from disk to raw pixels with a single function call
+	void LoadManager::loadImage(const char* filename)
+	{
+	  //decode
+		unsigned error = lodepng::decode(image, IMAGE_PIXLE_COLUMNS, IMAGE_PIXLE_ROWS, filename);
+
+	  //if there's an error, display it
+	  if(error) std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
+
+	  //the pixels are now in the vector "image", 4 bytes per pixel, ordered RGBARGBA..., use it as texture, draw it, ...
+	}
+
+	//Example 1
+	//Encode from raw pixels to disk with a single function call
+	//The image argument has width * height RGBA pixels or width * height * 4 bytes
+	void LoadManager::saveImage(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height)
+	{
+	  //Encode the image
+	  unsigned error = lodepng::encode(filename, image, IMAGE_PIXLE_COLUMNS, IMAGE_PIXLE_ROWS);
+
+	  //if there's an error, display it
+	  if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
+	}
+
+	/*
+	 *
+	 */
+	std::vector<std::vector<Utils::CellState> > LoadManager::generateImgGrid(char* pngFile)
+	{
+		loadImage(pngFile);
+		std::vector<std::vector<Utils::CellState> > grid(IMAGE_PIXLE_ROWS, std::vector<Utils::CellState>(IMAGE_PIXLE_COLUMNS));
+		for(int i = 0; i < IMAGE_PIXLE_ROWS * IMAGE_PIXLE_COLUMNS * PIXEL_LENGHT; i += PIXEL_LENGHT)
 		{
-			//grid[h][w]
+			grid[(i/4)/IMAGE_PIXLE_COLUMNS][(i/4)%IMAGE_PIXLE_COLUMNS] =
+					((image[i] != 255) || (image[i+1] != 255) || (image[i+2] != 255) || (image[i+3] != 255))
+					?(Utils::FREE):(Utils::OCCUPIED);
 		}
+
+		return grid;
 	}
 
-	return grid;
-}
-
-//TODO: fix
-int load()
-{
-	const char* filename = "hospital_section.png";
-	loadImage(filename);
-
-	cout << "width: " << width << ", height: " << height << endl;
-	for (int i = 0; i < 4; i++)
+	//TODO: fix
+	int LoadManager::load()
 	{
-		cout << (int)image[i] << " ";
-	}
-	cout << endl;
+		const char* filename = "hospital_section.png";
+		loadImage(filename);
 
-	//  Change the first line to black
-	for (unsigned int i = 0; i < width * 4 * 5; i+=4)
+		cout << "width: " << IMAGE_PIXLE_COLUMNS << ", height: " << IMAGE_PIXLE_ROWS << endl;
+		for (int i = 0; i < 4; i++)
+		{
+			cout << (int)image[i] << " ";
+		}
+		cout << endl;
+
+		//  Change the first line to black
+		for (unsigned int i = 0; i < IMAGE_PIXLE_COLUMNS * 4 * 5; i+=4)
+		{
+			image[i] = 0;
+			image[i + 1] = 0;
+			image[i + 2] = 0;
+			image[i + 3] = 255;
+		}
+
+		const char* newfile = "hospital_section2.png";
+		saveImage(newfile, image, IMAGE_PIXLE_COLUMNS, IMAGE_PIXLE_ROWS);
+
+		return 0;
+	}
+
+	LoadManager::~LoadManager()
 	{
-		image[i] = 0;
-		image[i + 1] = 0;
-		image[i + 2] = 0;
-		image[i + 3] = 255;
 	}
-
-	const char* newfile = "hospital_section2.png";
-	saveImage(newfile, image, width, height);
-
-	return 0;
 }
-
 
 
