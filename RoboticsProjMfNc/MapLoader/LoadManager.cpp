@@ -38,6 +38,22 @@ void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned
   if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 }
 
+int** generateImgGrid()
+{
+	loadImage(ConfigManager::_instance->getMapPath());
+	int** grid = new int*[height];
+	for(int h = 0; h < height; h++)
+	{
+		grid[h] = new int[width];
+		for (int w = 0; w < width; w++)
+		{
+			//grid[h][w]
+		}
+	}
+
+	return grid;
+}
+
 //TODO: fix
 int load()
 {
