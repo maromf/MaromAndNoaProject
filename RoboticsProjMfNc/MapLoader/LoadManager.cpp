@@ -15,6 +15,16 @@ namespace MNProj
 		IMAGE_PIXLE_ROWS = 0;
 	}
 
+	unsigned LoadManager::getImagePixleRows()
+	{
+		return IMAGE_PIXLE_ROWS;
+	}
+
+	unsigned LoadManager::getImagePixleColumns()
+	{
+		return IMAGE_PIXLE_COLUMNS;
+	}
+
 	//Example 1
 	//Decode from disk to raw pixels with a single function call
 	void LoadManager::loadImage(const char* filename)
@@ -43,15 +53,15 @@ namespace MNProj
 	/*
 	 *
 	 */
-	std::vector<std::vector<Utils::CellState> > LoadManager::generateImgGrid(char* pngFile)
+	std::vector<std::vector<int> > LoadManager::generateImgGrid(const char *pngFile)
 	{
 		loadImage(pngFile);
-		std::vector<std::vector<Utils::CellState> > grid(IMAGE_PIXLE_ROWS, std::vector<Utils::CellState>(IMAGE_PIXLE_COLUMNS));
+		std::vector<std::vector<int> > grid(IMAGE_PIXLE_ROWS, std::vector<int>(IMAGE_PIXLE_COLUMNS));
 		for(int i = 0; i < IMAGE_PIXLE_ROWS * IMAGE_PIXLE_COLUMNS * PIXEL_LENGHT; i += PIXEL_LENGHT)
 		{
 			grid[(i/4)/IMAGE_PIXLE_COLUMNS][(i/4)%IMAGE_PIXLE_COLUMNS] =
 					((image[i] != 255) || (image[i+1] != 255) || (image[i+2] != 255) || (image[i+3] != 255))
-					?(Utils::FREE):(Utils::OCCUPIED);
+					?(MNProj::FREE_CELL):(MNProj::OCCUPIED_CELL);
 		}
 
 		return grid;
