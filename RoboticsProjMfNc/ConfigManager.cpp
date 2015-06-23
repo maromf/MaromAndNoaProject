@@ -2,8 +2,10 @@
  * ConfigManager.cpp
  *
  *  Created on: Jun 19, 2015
- *      Author: colman
+ *      Author: Noa Cohen
  */
+
+#define PROP_SEP ":"
 
 #include "ConfigManager.h"
 
@@ -11,6 +13,7 @@ ConfigManager* ConfigManager::_instance = 0;
 
 ConfigManager* ConfigManager::Instance()
 {
+	// when Configuration Manager not initialized
 	if (_instance == 0)
 	{
 		_instance = new ConfigManager();
@@ -25,24 +28,110 @@ void ConfigManager::inizializeData()
 	ifstream file;
 
 	file.open(CONFIG_PATH, ios::in);
-	if (file.is_open())
+
+	if (!file.is_open())
 	{
-		string temp;
-		file >> temp >> _mapPath;
-		file >> temp >> _startX;
-		file >> temp >> _startY;
-		file >> temp >> _startYaw;
-		file >> temp >> _goalX;
-		file >> temp >> _goalY;
-		file >> temp >> _robotSizeX;
-		file >> temp >> _robotSizeY;
-		file >> temp >> _mapResulotionCM;
-		file >> temp >> _gridResulotionCM;
+		cout << "Could not open the parameters file.";
+	}
+	else
+	{
+		string line;
+
+		// get configuration lines and set the properties
+		while (getline(file, line))
+		{
+			setProperty(line);
+		}
+
 		file.close();
 	}
 }
 
-char* ConfigManager::getMapPath()
+void ConfigManager::setProperty(string line)
+{
+	size_t propSplit = line.find(PROP_SEP);
+
+	// check if line is valid (with property separator)
+	if (propSplit == string::npos)
+	{
+		cout << "Property not exists.";
+	}
+	else
+	{
+		// split the property name and the property values
+		string propName = line.substr(0, propSplit);
+		string propValue = line.substr(propSplit + 2);
+
+		// set property value into the manager
+		if (!setPropertyValue(propName, propValue))
+		{
+			// no matching property
+			cout << "Property " + propName + "not exists.";
+		}
+	}
+}
+
+bool ConfigManager::setPropertyValue(string propName, string propValue)
+{
+	bool success = true;
+
+	vector<string> values = splitline(propValue);
+
+	if (propName == "map") {
+		_mapPath = values[0].c_str();
+	}
+	else if (propName == "startLocation") {
+		_startX = atoi(values[0].c_str());
+		_startY = atoi(values[1].c_str());
+		_startYaw = atoi(values[2].c_str());
+	}
+	else if (propName == "goal") {
+		_goalX = atoi(values[0].c_str());
+		_goalY = atoi(values[1].c_str());
+	}
+	else if (propName == "robotSize") {
+		_robotSizeX = atoi(values[0].c_str());
+		_robotSizeY = atoi(values[0].c_str());
+	}
+	else if (propName == "MapResolutionCM"){
+		_mapResulotionCM = atof(values[0].c_str());
+	}
+	else if (propName == "GridResolutionCM") {
+		_gridResulotionCM = atof(values[0].c_str());
+	}
+	// no matching title
+	else {
+		success = false;
+	}
+
+	return success;
+}
+
+vector<string> ConfigManager::splitline(string str)
+{
+	string str2;
+	vector<string> splitted;
+	size_t pos;
+
+	// put the values in vector - separate relays on spaces.
+	// loop end when there is no more spaces.
+	while ((pos = str.find_first_of(" ")) != string::npos)
+	{
+		// cut value and push it into the vector
+		str2 = str.substr(0, pos);
+		splitted.push_back(str2);
+
+		// delete current value from the big string
+		str = str.substr(pos + 1);
+	}
+
+	// push the last value.
+	splitted.push_back(str);
+
+	return splitted;
+}
+
+const char* ConfigManager::getMapPath()
 {
 	return _mapPath;
 }
