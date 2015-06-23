@@ -36,6 +36,8 @@ bool MoveForward::checkObstacleInFront()
 			break;
 		}
 	}
+
+	return isObstacleInFront;
 }
 
 
