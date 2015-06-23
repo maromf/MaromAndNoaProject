@@ -8,6 +8,7 @@
 #include <libplayerc++/playerc++.h>
 #include <iostream>
 #include "Robot.h"
+#include "ConfigManager.h"
 
 using namespace PlayerCc;
 
