@@ -10,14 +10,17 @@
 
 using namespace std;
 namespace MNProj{
+
 static const int FREE_CELL = 0;
 static const int OCCUPIED_CELL = 1;
 static const int UNKNOWN_CELL = 2;
 
-	class Utils {
+
+
+class Utils {
 	public:
 
-	};
+};
 }
 
 #endif /* UTILS_H_ */

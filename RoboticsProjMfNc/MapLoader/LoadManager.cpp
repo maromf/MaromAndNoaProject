@@ -59,8 +59,8 @@ namespace MNProj
 		std::vector<std::vector<int> > grid(IMAGE_PIXLE_ROWS, std::vector<int>(IMAGE_PIXLE_COLUMNS));
 		for(int i = 0; i < IMAGE_PIXLE_ROWS * IMAGE_PIXLE_COLUMNS * PIXEL_LENGHT; i += PIXEL_LENGHT)
 		{
-			grid[(i/4)/IMAGE_PIXLE_COLUMNS][(i/4)%IMAGE_PIXLE_COLUMNS] =
-					((image[i] != 255) || (image[i+1] != 255) || (image[i+2] != 255) || (image[i+3] != 255))
+			grid[(i / 4) / IMAGE_PIXLE_COLUMNS][(i / 4) % IMAGE_PIXLE_COLUMNS] =
+					((image[i] != 255) || (image[i + 1] != 255) || (image[i + 2] != 255) || (image[i + 3] != 255))
 					?(MNProj::FREE_CELL):(MNProj::OCCUPIED_CELL);
 		}
 
