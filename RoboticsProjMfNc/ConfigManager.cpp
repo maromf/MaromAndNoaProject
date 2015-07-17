@@ -78,7 +78,7 @@ bool ConfigManager::setPropertyValue(string propName, string propValue)
 	vector<string> values = splitline(propValue);
 
 	if (propName == "map") {
-		_mapPath = values[0].c_str();
+		_mapPath = const_cast<char*>(values[0].c_str());
 	}
 	else if (propName == "startLocation") {
 		_startX = atoi(values[0].c_str());
@@ -131,7 +131,7 @@ vector<string> ConfigManager::splitline(string str)
 	return splitted;
 }
 
-const char* ConfigManager::getMapPath()
+char* ConfigManager::getMapPath()
 {
 	return _mapPath;
 }

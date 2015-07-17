@@ -40,6 +40,23 @@ namespace MNProj{
 		RoboWorldGrid = fitResolution(realWorldImage, pixelsResulotion, roboWorldResulotion);
     }
 
+	int Map::getHeight() {
+		return RoboWorldGrid.size();
+	}
+
+	int Map::getWidth(){
+		if (getHeight() == 0)
+			return 0;
+		else {
+			return RoboWorldGrid[0].size();
+		}
+	}
+
+	bool Map::isFree(Location l) {
+		return ((l.getX() >= getWidth()) || (l.getY() >= getHeight()))?false:
+				((RoboWorldGrid[l.getY()][l.getX()] == MNProj::FREE_CELL)?true:false);
+	}
+
 	void Map::wallThicking(std::vector<std::vector<int> > grid, double pixelsResulotion, int roboSizeX, int roboSizeY)
 	{
 		std::vector<std::vector<int> > tempGrid(loadManager.getImagePixleRows(),
@@ -129,11 +146,11 @@ namespace MNProj{
 		for (int i = 0; i < newRowsLenght; i++)
 		{
 			// Get the X coordinate of the real world out of the robot grid x index.
-			int realWorldX = (i * roboWorldRatio) % newRowsLenght;
+			int realWorldX = ((int)(i * roboWorldRatio)) % (int)newRowsLenght;
 			for (int j = 0; j < newColumnsLenght; j++)
 			{
 				// Get the Y coordinate of the real world out of the robot grid y index.
-				int realWorldY = (j * roboWorldRatio) % newColumnsLenght;
+				int realWorldY = ((int)(j * roboWorldRatio)) % (int)newColumnsLenght;
 
 				// Indicates the real world grid location
 				Location temLocation = Location(realWorldX, realWorldY);

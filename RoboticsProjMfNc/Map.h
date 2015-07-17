@@ -69,6 +69,12 @@ namespace MNProj{
 		*/
 		void wallThicking(std::vector<std::vector<int> > grid, double pixelsResulotion, int roboSizeX, int roboSizeY);
 
+		int getHeight();
+
+		int getWidth();
+
+		bool isFree(Location l);
+
 		/**
 		    This method gets a grid, pixel Resolution and Robot world Resolution.
 		    The method creates and return new grid in fixed resolution according to the given resolutions.

@@ -24,7 +24,7 @@ namespace MNProj {
 		std::vector<unsigned char> image; //the raw pixels
 		unsigned IMAGE_PIXLE_ROWS;
 		unsigned IMAGE_PIXLE_COLUMNS;
-		const unsigned PIXEL_LENGHT = 4; //4 Bytes per pixel
+		static const unsigned PIXEL_LENGHT = 4; //4 Bytes per pixel
 
 	public:
 		LoadManager();           // Ctor

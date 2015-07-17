@@ -18,6 +18,11 @@ namespace MNProj {
 			setY(yCoord);
 	}
 
+	Location::Location() {
+			setX(0);
+			setY(0);
+	}
+
 	Location::~Location() {
 		// TODO Auto-generated destructor stub
 	}
@@ -37,5 +42,13 @@ namespace MNProj {
 	void Location::setY(int yCoord){
 		  y = yCoord;
 	}
+
+//	bool operator==(const Location & a, const Location & b) {
+//		if ((a.getX() == b.getX()) && (a.getY() == b.getY()))
+//			return true;
+//		else{
+//			return false;
+//		}
+//	}
 
 } /* namespace MNProj */

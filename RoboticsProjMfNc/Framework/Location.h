@@ -22,6 +22,7 @@ private:
 public:
 
 	Location(int xCoord, int yCoord); // Ctor
+	Location();
 	virtual ~Location();              // Dtor
 
 	/**

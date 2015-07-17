@@ -18,8 +18,8 @@ static const int UNKNOWN_CELL = 2;
 
 
 class Utils {
-	public:
 
+public:
 };
 }
 

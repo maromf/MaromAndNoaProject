@@ -18,7 +18,7 @@ class ConfigManager {
 public:
 	// Get the current configuration manager - singelton.
 	static ConfigManager* Instance();
-	const char* getMapPath();
+	char* getMapPath();
 	int getStartX();
 	int getStartY();
 	int getStartYaw();
@@ -33,7 +33,7 @@ private:
 	ConfigManager(){}
 	static ConfigManager *_instance;
 	const char* CONFIG_PATH = "./parameters.txt";
-	const char* _mapPath;
+	char* _mapPath;
 	int _startX, _startY, _startYaw, _goalX, _goalY, _robotSizeX, _robotSizeY;
 	double _mapResulotionCM, _gridResulotionCM;
 	void inizializeData();
