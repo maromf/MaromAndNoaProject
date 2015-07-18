@@ -43,12 +43,12 @@ namespace MNProj {
 		  y = yCoord;
 	}
 
-//	bool operator==(const Location & a, const Location & b) {
-//		if ((a.getX() == b.getX()) && (a.getY() == b.getY()))
-//			return true;
-//		else{
-//			return false;
-//		}
-//	}
+	bool Location::operator== (Location b) const {
+		if((x - b.getX()) && (y == b.getY()))
+			return true;
+		else{
+			return false;
+		}
+	}
 
 } /* namespace MNProj */

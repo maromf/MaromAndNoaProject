@@ -52,6 +52,8 @@ public:
 	    @param xCoord - The Y coordinate.
 	*/
     void setY(int yCoord);
+
+    bool operator== (Location b) const;
 };
 
 } /* namespace MNProj */

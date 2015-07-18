@@ -28,10 +28,33 @@ void PathPlannerAlgo::initDirections() {
 
 std::vector<Location> PathPlannerAlgo::generatePath(Location end) {
 
+	std::vector<Location> Locations;
 
-	for (int i = 0;  i < PathPlannerAlgo::directions.size(); ++ i) {
+	AlgoNode currentNode(_startLocation, 0);
+	openQueue.push(currentNode);
 
+	while (!openQueue.empty()) {
+		AlgoNode node = openQueue.top();
+		if(node.getLocation() == end ) {
+			return retrivePath(node);
+		}
+
+		visitedNodes[std::make_pair(node.getLocation().getX(),node.getLocation().getY())] =
+				PathPlannerAlgo::CLOSED_NODE;
+		openQueue.pop();
+
+		std::vector<AlgoNode> neighbors = getNeighborsNodes(node);
+		for (int i = 0;  i < neighbors.size(); ++ i) {
+			AlgoNode neighborNode = neighbors[i];
+			int x = neighborNode.getLocation().getX();
+			int y = neighborNode.getLocation().getY();
+
+			visitedNodes[std::make_pair(x,y)] = PathPlannerAlgo::OPEN_NODE;
+			openQueue.push(neighborNode);
+		}
 	}
+
+	return Locations;
 }
 
 std::vector<AlgoNode> PathPlannerAlgo::getNeighborsNodes(AlgoNode current) {
@@ -52,12 +75,30 @@ std::vector<AlgoNode> PathPlannerAlgo::getNeighborsNodes(AlgoNode current) {
 		if (!_map.isFree(tempLocation))
 			continue;
 
+		if(visitedNodes[std::make_pair(newX,newY)] == PathPlannerAlgo::CLOSED_NODE) {
+			continue;
+		}
+
 		AlgoNode neighbor(tempLocation, current.getGGrade() + directions[i].second);
 
-		//neighbors.push_back();
+		neighbor.calcHGrade(_endLocation);
+		neighbor.setFatherLocation(current.getLocation());
+
+		neighbors->push_back(neighbor);
 	}
 
 	return *neighbors;
+}
+
+std::vector<Location> PathPlannerAlgo::retrivePath(AlgoNode node) {
+	std::vector<Location> path;
+	Location tempLocation = node.getLocation();
+	while(!(tempLocation == _startLocation)) {
+		path.push_back(tempLocation);
+		tempLocation = node.getFatherLocation();
+	}
+	path.push_back(tempLocation);
+	return path;
 }
 
 PathPlannerAlgo::~PathPlannerAlgo() {

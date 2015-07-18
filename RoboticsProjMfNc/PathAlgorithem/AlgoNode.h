@@ -9,7 +9,7 @@
 #define ALGONODE_H_
 
 #include "../Framework/Location.h"
-#include<stdlib.h>
+#include <stdlib.h>
 namespace MNProj {
 
 class AlgoNode {
@@ -24,12 +24,16 @@ public:
 	int getGGrade();
 	void reGenerateGrade(Location end);
 	int calcHGrade(Location end);
+	Location getFatherLocation();
+	void setFatherLocation(Location l);
+	bool operator< (AlgoNode a) const;
 	virtual ~AlgoNode();
 
 private:
 	Location _currentPosition;
 	int _GGrade;
 	int _HGrade;
+	Location _fatherLocation;
 };
 
 } /* namespace MNProj */
