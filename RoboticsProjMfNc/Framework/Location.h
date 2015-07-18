@@ -12,7 +12,6 @@
 #ifndef LOCATION_H_
 #define LOCATION_H_
 
-namespace MNProj {
 
 class Location {
 private:
@@ -56,6 +55,5 @@ public:
     bool operator== (Location b) const;
 };
 
-} /* namespace MNProj */
 
 #endif /* LOCATION_H_ */

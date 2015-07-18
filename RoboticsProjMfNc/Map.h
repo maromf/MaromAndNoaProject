@@ -14,13 +14,16 @@
 
 
 #include "MapLoader/LoadManager.h"
-#include "Utils.h"
 #include "Framework/Location.h"
 #include <math.h>
 
 using namespace std;
-namespace MNProj{
-	class Map {
+class Map {
+
+	static const int FREE_CELL = 0;
+	static const int OCCUPIED_CELL = 1;
+	static const int UNKNOWN_CELL = 2;
+
 	public:
 		Map();            // Ctor
 		virtual ~Map();   // Dtor
@@ -86,7 +89,7 @@ private:
 			    @param limitCoord - The limit of the grid - his size (Location).
 			*/
 			bool checkIfOccupied(std::vector<std::vector<int> > grid,Location location, int buffer, Location limit);
-	};
- }
+};
+
 
 #endif /* MAP_H_ */

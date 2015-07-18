@@ -10,7 +10,6 @@
  */
 
 #include "Map.h"
-namespace MNProj{
 	Map::Map() {
 		generateImageGrid();
 	}
@@ -54,7 +53,7 @@ namespace MNProj{
 
 	bool Map::isFree(Location l) {
 		return ((l.getX() >= getWidth()) || (l.getY() >= getHeight()))?false:
-				((RoboWorldGrid[l.getY()][l.getX()] == MNProj::FREE_CELL)?true:false);
+				((RoboWorldGrid[l.getY()][l.getX()] == FREE_CELL)?true:false);
 	}
 
 	void Map::wallThicking(std::vector<std::vector<int> > grid, double pixelsResulotion, int roboSizeX, int roboSizeY)
@@ -82,7 +81,7 @@ namespace MNProj{
 				Location tempLocation = Location(i,j);
 
 				// If cell is occupied then color all his buffered section.
-				if(tempGrid[i][j] == MNProj::OCCUPIED_CELL)
+				if(tempGrid[i][j] == OCCUPIED_CELL)
 					colorizeBufferSection(grid,buffer,tempLocation,gridLimit);
 			}
 		}
@@ -100,7 +99,7 @@ namespace MNProj{
 			for (int j = newCol; j < limitCoord.getY(); j++)
 			{
 				// Paint the cell.
-				grid[i][j] = MNProj::OCCUPIED_CELL;
+				grid[i][j] = OCCUPIED_CELL;
 			}
 		}
 
@@ -157,9 +156,9 @@ namespace MNProj{
 
 				// If section is occupied then sets the current cell as occupied, else - free.
 				if(checkIfOccupied(grid, temLocation, roboWorldRatio, limit))
-					newGrid[i][j] = MNProj::OCCUPIED_CELL;
+					newGrid[i][j] = OCCUPIED_CELL;
 				else
-					newGrid[i][j] = MNProj::FREE_CELL;
+					newGrid[i][j] = FREE_CELL;
 			}
 		}
 
@@ -194,5 +193,5 @@ namespace MNProj{
 	Map::~Map() {
 		// TODO Auto-generated destructor stub
 	}
-}
+
 

@@ -11,7 +11,6 @@
 #include "Behavior.h"
 #include "../Robot.h"
 
-namespace MNProj {
 	class MoveForward : Behavior {
 	private:
 		bool checkObstacleInFront();
@@ -24,6 +23,6 @@ namespace MNProj {
 		virtual bool stopCond();
 		virtual void action();
 	};
-}
+
 
 #endif /* MOVEFORWARD_H_ */

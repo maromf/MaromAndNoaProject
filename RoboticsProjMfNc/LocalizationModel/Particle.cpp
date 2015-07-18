@@ -7,15 +7,15 @@
 
 #include "Particle.h"
 
-namespace MNProj {
 
 Particle::Particle(double xPos, double yPos, double yaw) {
-	// TODO Auto-generated constructor stub
-
+	_belief = 0;
+	_yaw = 0;
+	_xPos = 0;
+	_yPos = 0;
 }
 
 Particle::~Particle() {
 	// TODO Auto-generated destructor stub
 }
 
-} /* namespace MNProj */

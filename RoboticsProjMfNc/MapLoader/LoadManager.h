@@ -13,18 +13,20 @@
 
 #include "lodepng.h"
 #include <iostream>
-#include "../Utils.h"
 #include "../ConfigManager.h"
 
 using namespace std;
 
-namespace MNProj {
-	class LoadManager {
+class LoadManager {
+
 	private:
 		std::vector<unsigned char> image; //the raw pixels
 		unsigned IMAGE_PIXLE_ROWS;
 		unsigned IMAGE_PIXLE_COLUMNS;
 		static const unsigned PIXEL_LENGHT = 4; //4 Bytes per pixel
+		static const int FREE_CELL = 0;
+		static const int OCCUPIED_CELL = 1;
+		static const int UNKNOWN_CELL = 2;
 
 	public:
 		LoadManager();           // Ctor
@@ -44,8 +46,8 @@ namespace MNProj {
 		    @return The generated grid (vector<vector<int>>).
 		*/
 		std::vector< std::vector<int> > generateImgGrid(const char* pngFile);
-	};
-}
+};
+
 
 
 #endif /* LOADMANAGER_H_ */

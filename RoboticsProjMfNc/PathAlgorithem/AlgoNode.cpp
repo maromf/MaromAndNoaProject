@@ -8,7 +8,6 @@
 #include "AlgoNode.h"
 
 
-namespace MNProj {
 
 AlgoNode::AlgoNode(Location position, int GGrade) {
 	_currentPosition = position;
@@ -69,4 +68,3 @@ AlgoNode::~AlgoNode() {
 	// TODO Auto-generated destructor stub
 }
 
-} /* namespace MNProj */

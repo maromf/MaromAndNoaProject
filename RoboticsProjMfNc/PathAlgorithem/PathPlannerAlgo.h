@@ -17,7 +17,6 @@
 #include "prioritySort.h"
 using namespace std;
 
-namespace MNProj {
 
 
 class PathPlannerAlgo {
@@ -43,7 +42,5 @@ private:
 	std::vector<pair<Location,int> > directions;
     std::map<std::pair<int,int>, int> visitedNodes;
 };
-
-} /* namespace MNProj */
 
 #endif /* PATHPLANNERALGO_H_ */

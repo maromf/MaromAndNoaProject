@@ -7,7 +7,6 @@
 
 #include "LocalizationManager.h"
 
-namespace MNProj {
 
 LocalizationManager::LocalizationManager() {
 	// TODO Auto-generated constructor stub
@@ -18,4 +17,3 @@ LocalizationManager::~LocalizationManager() {
 	// TODO Auto-generated destructor stub
 }
 
-} /* namespace MNProj */

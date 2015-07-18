@@ -8,7 +8,6 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
 
-namespace MNProj {
 
 class Particle {
 private:
@@ -22,6 +21,5 @@ public:
 	virtual ~Particle();
 };
 
-} /* namespace MNProj */
 
 #endif /* PARTICLE_H_ */

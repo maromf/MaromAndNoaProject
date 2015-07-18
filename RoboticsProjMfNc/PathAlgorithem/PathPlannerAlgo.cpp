@@ -7,7 +7,6 @@
 
 #include "PathPlannerAlgo.h"
 
-namespace MNProj {
 
 PathPlannerAlgo::PathPlannerAlgo(Map map, Location start) {
 	_startLocation = start;
@@ -105,4 +104,3 @@ PathPlannerAlgo::~PathPlannerAlgo() {
 	// TODO Auto-generated destructor stub
 }
 
-} /* namespace MNProj */

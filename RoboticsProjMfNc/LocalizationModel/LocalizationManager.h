@@ -12,7 +12,6 @@
 #include <vector>
 using namespace std;
 
-namespace MNProj {
 
 class LocalizationManager {
 private:
@@ -27,6 +26,5 @@ public:
 	virtual ~LocalizationManager();
 };
 
-} /* namespace MNProj */
 
 #endif /* LOCALIZATIONMANAGER_H_ */

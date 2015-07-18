@@ -15,7 +15,6 @@
 
 using namespace PlayerCc;
 
-namespace MNProj{
 	PathPlannerAlgo* algo;
 	Map* m;
 	Location* start;
@@ -33,7 +32,6 @@ namespace MNProj{
 		Robot robot("localhost", 6665);
 		return 0;
 	}
-};
 
 
 

@@ -1,6 +1,5 @@
 #include "Behavior.h"
 
-namespace MNProj {
 	Behavior::Behavior(Robot *robot) : _robot(robot){
 	}
 
@@ -20,4 +19,4 @@ namespace MNProj {
 		}
 		return NULL;
 	}
-}
+

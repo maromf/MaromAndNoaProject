@@ -10,7 +10,6 @@
 
 #include "../Framework/Location.h"
 #include <stdlib.h>
-namespace MNProj {
 
 class AlgoNode {
 	static const int DIRECT_MOV_SCORE = 10;
@@ -36,6 +35,5 @@ private:
 	Location _fatherLocation;
 };
 
-} /* namespace MNProj */
 
 #endif /* ALGONODE_H_ */

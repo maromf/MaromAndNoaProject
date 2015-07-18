@@ -13,7 +13,6 @@
 
 #include "MoveForward.h"
 
-namespace MNProj {
 	MoveForward::MoveForward(Robot *robot) : Behavior(robot) {
 		// TODO Auto-generated constructor stub
 
@@ -58,4 +57,4 @@ namespace MNProj {
 	{
 		_robot->setSpeed(FORWARD_SPEED, 0);
 	}
-}
+

@@ -11,8 +11,6 @@
 
 #include "Location.h"
 
-namespace MNProj {
-
 	Location::Location(int xCoord, int yCoord) {
 			setX(xCoord);
 			setY(yCoord);
@@ -51,4 +49,3 @@ namespace MNProj {
 		}
 	}
 
-} /* namespace MNProj */

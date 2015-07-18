@@ -3,7 +3,6 @@
 #include "../Robot.h"
 using namespace std;
 
-namespace MNProj {
 	class Behavior {
 	private:
 		vector<Behavior *> _nextBehaviors;
@@ -22,4 +21,4 @@ namespace MNProj {
 		Behavior(Robot *robot);
 		virtual ~Behavior();
 	};
-}
+

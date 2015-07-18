@@ -10,16 +10,14 @@
 
 #include "AlgoNode.h"
 
-namespace MNProj {
 
 class prioritySort {
 public:
 	prioritySort();
 	virtual ~prioritySort();
 
-	bool operator() (AlgoNode a, AlgoNode b) const;
+	bool operator() (AlgoNode & a, AlgoNode & b) const;
 };
-
-} /* namespace MNProj */
+ /* namespace MNProj */
 
 #endif /* PRIORITYSORT_H_ */

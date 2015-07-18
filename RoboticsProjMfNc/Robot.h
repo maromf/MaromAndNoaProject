@@ -13,8 +13,7 @@
 using namespace PlayerCc;
 using namespace std;
 
-namespace MNProj{
-	class Robot {
+class Robot {
 	private:
 		PlayerClient _pc;
 		Position2dProxy _pp;
@@ -32,7 +31,7 @@ namespace MNProj{
 
 		float* getLaserScan();
 		int deg_to_index(double deg);
-	};
-}
+};
+
 
 #endif /* ROBOT_H_ */

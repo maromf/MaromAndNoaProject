@@ -6,7 +6,6 @@
  */
 
 #include "Robot.h"
-namespace MNProj{
 	Robot::Robot(string ip, int port) : _pc(ip, port), _pp(&_pc), _lp(&_pc) {
 		// TODO Auto-generated constructor stub
 		_lastX = _pp.GetXPos();
@@ -52,4 +51,4 @@ namespace MNProj{
 	{
 		return (deg + 120) / 0.36;
 	}
-}
+
