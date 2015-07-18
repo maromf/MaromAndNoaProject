@@ -13,24 +13,26 @@
 using namespace PlayerCc;
 using namespace std;
 
-class Robot {
-private:
-	PlayerClient _pc;
-	Position2dProxy _pp;
-	LaserProxy _lp;
-	float _lastX, _lastY, _lastYaw;
+namespace MNProj{
+	class Robot {
+	private:
+		PlayerClient _pc;
+		Position2dProxy _pp;
+		LaserProxy _lp;
+		float _lastX, _lastY, _lastYaw;
 
-public:
-	Robot(string ip, int port);
-	virtual ~Robot();
+	public:
+		Robot(string ip, int port);
+		virtual ~Robot();
 
-	void setSpeed(float linear, float angular);
-	float getX();
-	float getY();
-	float getYaw();
+		void setSpeed(float linear, float angular);
+		float getX();
+		float getY();
+		float getYaw();
 
-	float* getLaserScan();
-	int deg_to_index(double deg);
-};
+		float* getLaserScan();
+		int deg_to_index(double deg);
+	};
+}
 
 #endif /* ROBOT_H_ */

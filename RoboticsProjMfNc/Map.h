@@ -21,32 +21,6 @@
 using namespace std;
 namespace MNProj{
 	class Map {
-	private:
-		LoadManager loadManager;
-		std::vector<std::vector<int> > realWorldImage; // The real world grid
-		std::vector<std::vector<int> > RoboWorldGrid;  // The Robot world grid
-		/**
-		    This method gets grid and a region,
-		    and changes the values ​​of the cells in this region to occupied.
-
-		    @param grid - The img grid to run on (vector<vector<int>>).
-		    @param buffer - The buffer that indicates the region on the grid (int).
-		    @param startCoord - The start coordinate of the section (Location).
-		    @param limitCoord - The limit of the grid - his size (Location).
-		*/
-		void colorizeBufferSection(std::vector<std::vector<int> > grid, int buffer, Location startCoord, Location limitCoord);
-
-		/**
-		    This method gets grid and a region, and Returns true if one or more cells in the given region are occupied.
-		    If all cells in the given region are free - returns true.
-
-		    @param grid - The img grid to run on (vector<vector<int>>).
-		    @param buffer - The buffer that indicates the region on the grid (int).
-		    @param startCoord - The start coordinate of the section (Location).
-		    @param limitCoord - The limit of the grid - his size (Location).
-		*/
-		bool checkIfOccupied(std::vector<std::vector<int> > grid,Location location, int buffer, Location limit);
-
 	public:
 		Map();            // Ctor
 		virtual ~Map();   // Dtor
@@ -87,6 +61,31 @@ namespace MNProj{
 		std::vector<std::vector<int> > fitResolution(std::vector<std::vector<int> > grid,
 				double pixelsResulotion, double roboWorldResulotion);
 
+private:
+			LoadManager loadManager;
+			std::vector<std::vector<int> > realWorldImage; // The real world grid
+			std::vector<std::vector<int> > RoboWorldGrid;  // The Robot world grid
+			/**
+			    This method gets grid and a region,
+			    and changes the values ​​of the cells in this region to occupied.
+
+			    @param grid - The img grid to run on (vector<vector<int>>).
+			    @param buffer - The buffer that indicates the region on the grid (int).
+			    @param startCoord - The start coordinate of the section (Location).
+			    @param limitCoord - The limit of the grid - his size (Location).
+			*/
+			void colorizeBufferSection(std::vector<std::vector<int> > grid, int buffer, Location startCoord, Location limitCoord);
+
+			/**
+			    This method gets grid and a region, and Returns true if one or more cells in the given region are occupied.
+			    If all cells in the given region are free - returns true.
+
+			    @param grid - The img grid to run on (vector<vector<int>>).
+			    @param buffer - The buffer that indicates the region on the grid (int).
+			    @param startCoord - The start coordinate of the section (Location).
+			    @param limitCoord - The limit of the grid - his size (Location).
+			*/
+			bool checkIfOccupied(std::vector<std::vector<int> > grid,Location location, int buffer, Location limit);
 	};
  }
 
