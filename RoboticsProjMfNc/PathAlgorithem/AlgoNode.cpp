@@ -48,12 +48,20 @@ int AlgoNode::calcHGrade(Location end){
 	}
 
 }
+Location AlgoNode::getFatherLocation() {
+	return _fatherLocation;
+}
 
-bool operator<(AlgoNode & a, AlgoNode & b) {
-	if(a.getGrade() == b.getHGrade())
-		return (a.getHGrade() < b.getHGrade())?true:false;
+void AlgoNode::setFatherLocation(Location l) {
+	_fatherLocation = l;
+}
+
+
+bool AlgoNode::operator< (AlgoNode a) const {
+	if((_HGrade + _GGrade) == a.getGrade())
+		return (_HGrade < a.getHGrade())?true:false;
 	else {
-		return (a.getGrade() < b.getGrade())?true:false;
+		return ((_HGrade + _GGrade) < a.getGrade())?true:false;
 	}
 }
 
