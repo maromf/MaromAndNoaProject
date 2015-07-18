@@ -28,7 +28,12 @@ using namespace PlayerCc;
 		start = new Location(ConfigManager::Instance()->getStartX(), ConfigManager::Instance()->getStartY());
 		end = new Location(ConfigManager::Instance()->getGoalX(), ConfigManager::Instance()->getGoalY());
 		algo = new PathPlannerAlgo(*m,*start);
-		algo->generatePath(*end);
+		std::vector<Location> path = algo->generatePath(*end);
+
+        for ( int i = 0; i < path.size(); i++) {
+            cout << path[i].getX() << "," << path[i].getY() << "/n";
+        }
+
 		Robot robot("localhost", 6665);
 		return 0;
 	}
