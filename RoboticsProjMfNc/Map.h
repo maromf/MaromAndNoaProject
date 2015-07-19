@@ -15,6 +15,7 @@
 
 #include "MapLoader/LoadManager.h"
 #include "Framework/Location.h"
+#include <iostream>
 #include <math.h>
 
 using namespace std;
@@ -25,7 +26,7 @@ class Map {
 	static const int UNKNOWN_CELL = 2;
 
 	public:
-		Map();            // Ctor
+		Map(char* path);            // Ctor
 		virtual ~Map();   // Dtor
 
 		/**
@@ -33,7 +34,7 @@ class Map {
 		    The method gets the image file from the configuration model, reads its and transforms it into grid.
 		    The method build the grid according to the given resolution from the configuration model.
 		*/
-		void generateImageGrid();
+		void generateImageGrid(char* path);
 
 		/**
 		    This method gets a grid, pixelResulotion and the robot size.
@@ -44,11 +45,19 @@ class Map {
 		    @param roboSizeX - The robot vertical Size (CM) (int).
 		    @param roboSizeY - The robot horizontal Size (CM) (int).
 		*/
-		void wallThicking(std::vector<std::vector<int> > grid, double pixelsResulotion, int roboSizeX, int roboSizeY);
+		void wallThicking(Grid* grid, double pixelsResulotion, int roboSizeX, int roboSizeY);
 
 		int getHeight();
 
 		int getWidth();
+
+		int getRealWorldHeight();
+
+		int getRealWorldWidth();
+
+		Location* RobotWorldToRealLocation(Location location);
+
+		Location* RealToRobotWorldLocation(Location location);
 
 		bool isFree(Location l);
 
@@ -61,13 +70,15 @@ class Map {
 		    @param roboWorldResulotion - The resolution of each cell at the robo world grid (CM) (double).
 		    @return The new fixed grid.
 		*/
-		std::vector<std::vector<int> > fitResolution(std::vector<std::vector<int> > grid,
+		Grid* fitResolution(Grid* grid,
 				double pixelsResulotion, double roboWorldResulotion);
 
 private:
 			LoadManager loadManager;
-			std::vector<std::vector<int> > realWorldImage; // The real world grid
-			std::vector<std::vector<int> > RoboWorldGrid;  // The Robot world grid
+			Grid* realWorldGrid; // The real world grid
+			Grid* RoboWorldGrid;  // The Robot world grid
+
+			double _RatioRoboToReal;
 			/**
 			    This method gets grid and a region,
 			    and changes the values ​​of the cells in this region to occupied.
@@ -77,7 +88,7 @@ private:
 			    @param startCoord - The start coordinate of the section (Location).
 			    @param limitCoord - The limit of the grid - his size (Location).
 			*/
-			void colorizeBufferSection(std::vector<std::vector<int> > grid, int buffer, Location startCoord, Location limitCoord);
+			void colorizeBufferSection(Grid* grid, int buffer, Location startCoord);
 
 			/**
 			    This method gets grid and a region, and Returns true if one or more cells in the given region are occupied.
@@ -88,7 +99,11 @@ private:
 			    @param startCoord - The start coordinate of the section (Location).
 			    @param limitCoord - The limit of the grid - his size (Location).
 			*/
-			bool checkIfOccupied(std::vector<std::vector<int> > grid,Location location, int buffer, Location limit);
+			bool checkIfOccupied(Grid* grid,Location location, int buffer);
+
+			void printToConsole(Grid* grid);
+
+			void printToPng(Grid* grid, const char* file);
 };
 
 

@@ -20,21 +20,23 @@ using namespace PlayerCc;
 	Location* start;
 	Location* end;
 
-	int main()
+	int main(int argc, const char * argv[])
 	{
-		ConfigManager::Instance()->getGoalY();
-		m = new Map();
-		m->generateImageGrid();
+		m = new Map(ConfigManager::Instance()->getMapPath());
 		start = new Location(ConfigManager::Instance()->getStartX(), ConfigManager::Instance()->getStartY());
 		end = new Location(ConfigManager::Instance()->getGoalX(), ConfigManager::Instance()->getGoalY());
-		algo = new PathPlannerAlgo(*m,*start);
-		std::vector<Location> path = algo->generatePath(*end);
+
+		Location* roboStart = m->RealToRobotWorldLocation(*start);
+		Location* roboEnd = m->RealToRobotWorldLocation(*end);
+
+		algo = new PathPlannerAlgo(m,roboStart);
+		std::vector<Location*> path = algo->generatePath(roboEnd);
 
         for ( int i = 0; i < path.size(); i++) {
-            cout << path[i].getX() << "," << path[i].getY() << "/n";
+            cout << path[i]->getX() << "," << path[i]->getY() << "/n";
         }
 
-		Robot robot("localhost", 6665);
+//		Robot robot("localhost", 6665);
 		return 0;
 	}
 

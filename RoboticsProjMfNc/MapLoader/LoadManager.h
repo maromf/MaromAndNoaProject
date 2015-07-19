@@ -13,6 +13,7 @@
 
 #include "lodepng.h"
 #include <iostream>
+#include "../Framework/Grid.h"
 #include "../ConfigManager.h"
 
 using namespace std;
@@ -45,7 +46,9 @@ class LoadManager {
 		    @param pngFile - The image file path.
 		    @return The generated grid (vector<vector<int>>).
 		*/
-		std::vector< std::vector<int> > generateImgGrid(const char* pngFile);
+		Grid* generateImgGrid(const char* pngFile);
+
+		void SaveImgFromGrid(Grid* grid, const char *filename);
 };
 
 
