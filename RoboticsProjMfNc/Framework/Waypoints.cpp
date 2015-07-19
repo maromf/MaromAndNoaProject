@@ -26,7 +26,7 @@ Waypoints::Waypoints(vector<Location*> astarVector)
 		deltaX1 = deltaX2;
 		deltaY1 = deltaY2;
 	}
-	}
+}
 
 vector<Location*> Waypoints::getWaypoint()
 {

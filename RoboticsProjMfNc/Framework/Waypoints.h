@@ -18,7 +18,6 @@ private:
 public:
 	Waypoints(vector<Location*> astarVector);
 	vector<Location*> getWaypoint();
-
 };
 
 #endif /* WAYPOINTS_H_ */
