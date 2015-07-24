@@ -28,6 +28,9 @@ class LoadManager {
 		static const int FREE_CELL = 0;
 		static const int OCCUPIED_CELL = 1;
 		static const int UNKNOWN_CELL = 2;
+		static const int PATH_CELL = 3;
+		static const int START_CELL = 4;
+		static const int END_CELL = 5;
 
 	public:
 		LoadManager();           // Ctor

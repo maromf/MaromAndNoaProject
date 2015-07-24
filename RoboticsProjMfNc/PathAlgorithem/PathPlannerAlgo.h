@@ -33,14 +33,14 @@ public:
     std::vector<Location*> generatePath(Location* end);
 private:
     void initDirections();
-    std::vector<AlgoNode> getNeighborsNodes(AlgoNode current);
-    std::vector<Location*> retrivePath(AlgoNode node);
+    std::vector<AlgoNode*> getNeighborsNodes(AlgoNode* current);
+    std::vector<Location*> retrivePath(AlgoNode* node);
     Map* _map;
 	Location* _startLocation;
 	Location* _endLocation;
-    std::priority_queue<AlgoNode,std::vector<AlgoNode>, prioritySort> openQueue;
+    std::priority_queue<AlgoNode*,std::vector<AlgoNode*>, prioritySort> openQueue;
 	std::vector<pair<Location,int> > directions;
-    std::map<std::pair<int,int>, int> visitedNodes;
+    std::map<std::pair<int,int>, std::pair<AlgoNode*,int> > visitedNodes;
 };
 
 #endif /* PATHPLANNERALGO_H_ */

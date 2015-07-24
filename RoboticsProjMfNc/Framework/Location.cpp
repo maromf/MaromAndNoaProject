@@ -41,8 +41,8 @@
 		  y = yCoord;
 	}
 
-	bool Location::operator== (Location b) const {
-		if((x - b.getX()) && (y == b.getY()))
+	bool Location::operator== (Location* b) const {
+		if((x - b->getX()) && (y == b->getY()))
 			return true;
 		else{
 			return false;

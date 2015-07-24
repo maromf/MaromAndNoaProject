@@ -52,7 +52,7 @@ public:
 	*/
     void setY(int yCoord);
 
-    bool operator== (Location b) const;
+    bool operator== (Location* b) const;
 };
 
 

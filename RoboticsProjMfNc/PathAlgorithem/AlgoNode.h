@@ -10,6 +10,7 @@
 
 #include "../Framework/Location.h"
 #include <stdlib.h>
+#include <cmath>
 
 class AlgoNode {
 	static const int DIRECT_MOV_SCORE = 10;
@@ -21,18 +22,24 @@ public:
 	int getGrade();
 	int getHGrade();
 	int getGGrade();
+	void setGGrade(int grade);
 	void reGenerateGrade(Location* end);
-	int calcHGrade(Location* end);
-	Location* getFatherLocation();
-	void setFatherLocation(Location* l);
-	bool operator< (AlgoNode a) const;
+	void calcRecorsiveHGrade(Location* end);
+	void calcSquaredHGrade(Location* end);
+	void calcFixingHGrade(Location* end);
+	AlgoNode* getFatherNode();
+	void setFatherNode(AlgoNode* node);
+	bool operator< (AlgoNode* a) const;
 	virtual ~AlgoNode();
 
 private:
 	Location* _currentPosition;
 	int _GGrade;
 	int _HGrade;
-	Location* _fatherLocation;
+	AlgoNode* _fatherNode;
+
+	int recorsiveHGrade(Location* end);
+	int squaredDistance(Location* location);
 };
 
 

@@ -46,7 +46,7 @@
 
 //		printToConsole(RoboWorldGrid);
 
-		printToPng(realWorldGrid, "Player/Resolution.png");
+		printToPng(RoboWorldGrid, "Player/Resolution.png");
     }
 
 	int Map::getHeight() {
@@ -173,11 +173,11 @@
 		for (int i = 0; i < newRowsLenght; i++)
 		{
 			// Get the Y coordinate of the real world out of the robot grid x index.
-			int realWorldY = ((int)(i * roboWorldRatio)) % (int)newRowsLenght;
+			int realWorldY = ((int)(i * roboWorldRatio)) ;
 			for (int j = 0; j < newColumnsLenght; j++)
 			{
 				// Get the X coordinate of the real world out of the robot grid y index.
-				int realWorldX = ((int)(j * roboWorldRatio)) % (int)newColumnsLenght;
+				int realWorldX = ((int)(j * roboWorldRatio));
 
 				// Indicates the real world grid location
 				Location temLocation = Location(realWorldX, realWorldY);
@@ -219,6 +219,17 @@
 		return false;
 	}
 
+
+    void Map::setPath(std::vector<Location*> path) {
+		for(int i = 0; i < path.size(); i++)
+		{
+			RoboWorldGrid->setCellState(path[i]->getX(),path[i]->getY(), PATH_CELL);
+		}
+    }
+
+    void Map::PrintPng(const char* file) {
+    	printToPng(RoboWorldGrid, file);
+    }
 
 	void Map::printToConsole(Grid* grid) {
 

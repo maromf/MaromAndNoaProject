@@ -33,9 +33,11 @@ using namespace PlayerCc;
 		std::vector<Location*> path = algo->generatePath(roboEnd);
 
         for ( int i = 0; i < path.size(); i++) {
-            cout << path[i]->getX() << "," << path[i]->getY() << "/n";
+            cout << path[i]->getX() << "," << path[i]->getY() << endl;
         }
 
+        m->setPath(path);
+        m->PrintPng("Player/path.png");
 //		Robot robot("localhost", 6665);
 		return 0;
 	}

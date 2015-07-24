@@ -86,6 +86,9 @@
 	void LoadManager::SaveImgFromGrid(Grid* grid, const char *filename)
 	{
 		int freeCellInt = FREE_CELL;
+		int pathCellInt = PATH_CELL;
+		int startCellInt = START_CELL;
+		int endCellInt = END_CELL;
 
 		int width = grid->getWidth();
 		int height = grid->getHeight();
@@ -102,6 +105,21 @@
 					imageToSave.push_back(255);
 					imageToSave.push_back(255);
 					imageToSave.push_back(255);
+					imageToSave.push_back(255);
+				} else if (grid->getCellState(j,i) == pathCellInt){
+					imageToSave.push_back(0);
+					imageToSave.push_back(255);
+					imageToSave.push_back(64);
+					imageToSave.push_back(255);
+				} else if (grid->getCellState(j,i) == startCellInt){
+					imageToSave.push_back(0);
+					imageToSave.push_back(0);
+					imageToSave.push_back(255);
+					imageToSave.push_back(255);
+				} else if (grid->getCellState(j,i) == endCellInt){
+					imageToSave.push_back(255);
+					imageToSave.push_back(0);
+					imageToSave.push_back(0);
 					imageToSave.push_back(255);
 				} else {
 					imageToSave.push_back(0);

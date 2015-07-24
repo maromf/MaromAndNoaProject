@@ -17,8 +17,12 @@ prioritySort::~prioritySort() {
 	// TODO Auto-generated destructor stub
 }
 
-bool prioritySort::operator() (AlgoNode & a, AlgoNode & b) const {
- return (a < b);
+bool prioritySort::operator() (AlgoNode* a, AlgoNode* b) const {
+	if(a->getGrade() == b->getGrade())
+		return (a->getHGrade() > b->getHGrade())?true:false;
+	else {
+		return (a->getGrade() > b->getGrade())?true:false;
+	}
 }
 
 //bool prioritySort::operator() (AlgoNode a, AlgoNode b) const{

@@ -16,7 +16,7 @@ public:
 	prioritySort();
 	virtual ~prioritySort();
 
-	bool operator() (AlgoNode & a, AlgoNode & b) const;
+	bool operator() (AlgoNode* a, AlgoNode* b) const;
 };
  /* namespace MNProj */
 

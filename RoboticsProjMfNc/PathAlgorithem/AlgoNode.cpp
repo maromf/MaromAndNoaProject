@@ -13,7 +13,7 @@ AlgoNode::AlgoNode(Location* position, int GGrade) {
 	_currentPosition = position;
 	_GGrade = GGrade;
 	_HGrade = 0;
-	_fatherLocation = position;
+	_fatherNode = this;
 }
 
 Location* AlgoNode::getLocation() {
@@ -22,6 +22,10 @@ Location* AlgoNode::getLocation() {
 
 int AlgoNode::getHGrade(){
 	return _HGrade;
+}
+
+void AlgoNode::setGGrade(int grade){
+	_GGrade = grade;
 }
 
 int AlgoNode::getGGrade(){
@@ -33,10 +37,14 @@ int AlgoNode::getGrade(){
 }
 
 void AlgoNode::reGenerateGrade(Location* end) {
-	_HGrade = calcHGrade(end);
+	calcFixingHGrade(end);
 }
 
-int AlgoNode::calcHGrade(Location* end){
+void AlgoNode::calcRecorsiveHGrade(Location* end){
+	_HGrade = recorsiveHGrade(end);
+}
+
+int AlgoNode::recorsiveHGrade(Location* end) {
 	if (end->getY() == _currentPosition->getY())
 		return abs(end->getX() - _currentPosition->getX()) * DIRECT_MOV_SCORE;
 	else if (end->getX() == _currentPosition->getX())
@@ -45,24 +53,57 @@ int AlgoNode::calcHGrade(Location* end){
 		int tempX = _currentPosition->getX() + (end->getX() > _currentPosition->getX())?1:-1;
 		int tempY = _currentPosition->getY() + (end->getY() > _currentPosition->getX())?1:-1;
 		Location* temp = new Location(tempX,tempY);
-	    return (calcHGrade(temp) + DIAGONAL_MOV_SCORE);
+	    return (recorsiveHGrade(temp) + DIAGONAL_MOV_SCORE);
+	}
+}
+
+void AlgoNode::calcFixingHGrade(Location* end){
+	int deltaY = abs(end->getY() - _currentPosition->getY());
+	int deltaX = abs(end->getX() - _currentPosition->getX());
+
+	int diractFactor = 0;
+	int diagonalFactor = 0;;
+
+	if (end->getY() == _currentPosition->getY())
+		diractFactor = deltaX;
+	else if (end->getX() == _currentPosition->getX())
+		diractFactor = deltaY;
+	else if(deltaY == deltaX){
+		diagonalFactor = deltaX;
+	} else {
+		int diractFactor = abs(deltaY - deltaX);
+		int diagonalFactor = (deltaY < deltaX)?deltaY:deltaX;
 	}
 
-}
-Location* AlgoNode::getFatherLocation() {
-	return _fatherLocation;
-}
-
-void AlgoNode::setFatherLocation(Location* l) {
-	_fatherLocation = l;
+	_HGrade = ((diractFactor * DIRECT_MOV_SCORE) + (diagonalFactor * DIAGONAL_MOV_SCORE));
 }
 
 
-bool AlgoNode::operator< (AlgoNode a) const {
-	if((_HGrade + _GGrade) == a.getGrade())
-		return (_HGrade < a.getHGrade())?true:false;
+void AlgoNode::calcSquaredHGrade(Location* end){
+   _HGrade = (squaredDistance(end));
+}
+
+int AlgoNode::squaredDistance(Location* location) {
+	double x = abs(_currentPosition->getX() - location->getX());
+	double y = abs(_currentPosition->getY() - location->getY());
+
+	return (pow(x, 2) + pow(y,2));
+}
+
+AlgoNode* AlgoNode::getFatherNode() {
+	return _fatherNode;
+}
+
+void AlgoNode::setFatherNode(AlgoNode* node) {
+	_fatherNode = node;
+}
+
+
+bool AlgoNode::operator< (AlgoNode* a) const {
+	if((_HGrade + _GGrade) == a->getGrade())
+		return (_HGrade < a->getHGrade())?true:false;
 	else {
-		return ((_HGrade + _GGrade) < a.getGrade())?true:false;
+		return ((_HGrade + _GGrade) < a->getGrade())?true:false;
 	}
 }
 
