@@ -26,7 +26,7 @@ public:
 	void reGenerateGrade(Location* end);
 	void calcRecorsiveHGrade(Location* end);
 	void calcSquaredHGrade(Location* end);
-	void calcFixingHGrade(Location* end);
+	int calcFixingHGrade(Location* end);
 	AlgoNode* getFatherNode();
 	void setFatherNode(AlgoNode* node);
 	bool operator< (AlgoNode* a) const;

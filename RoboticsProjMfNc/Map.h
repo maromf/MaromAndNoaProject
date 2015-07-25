@@ -25,8 +25,9 @@ class Map {
 	static const int OCCUPIED_CELL = 1;
 	static const int UNKNOWN_CELL = 2;
 	static const int PATH_CELL = 3;
-	static const int START_CELL = 4;
-	static const int END_CELL = 5;
+	static const int WAY_POINT_CELL = 4;
+	static const int START_CELL = 5;
+	static const int END_CELL = 6;
 
 	public:
 		Map(char* path);            // Ctor
@@ -50,18 +51,42 @@ class Map {
 		*/
 		void wallThicking(Grid* grid, double pixelsResulotion, int roboSizeX, int roboSizeY);
 
+		/*
+		 * Gets the Height of the robot world map
+		 */
 		int getHeight();
 
+		/*
+		 * Gets the Width of the robot world map
+		 */
 		int getWidth();
 
+		/*
+		 * Gets the Height of the real world map
+		 */
 		int getRealWorldHeight();
 
+		/*
+		 * Gets the Width of the real world map
+		 */
 		int getRealWorldWidth();
 
+		/*
+		 * Convert Robot world location to real world location ( by the fixing resolution ).
+		 *  @param location - The robot world location.
+		 */
 		Location* RobotWorldToRealLocation(Location location);
 
+		/*
+		 * Convert real world location to robot world location ( by the fixing resolution ).
+		 *  @param location - The real world location.
+		 */
 		Location* RealToRobotWorldLocation(Location location);
 
+		/*
+		 * Check if the given location is not occupied on map.
+		 *  @param location - The robot world location.
+		 */
 		bool isFree(Location l);
 
 		/**
@@ -76,9 +101,14 @@ class Map {
 		Grid* fitResolution(Grid* grid,
 				double pixelsResulotion, double roboWorldResulotion);
 
+
 		void PrintPng(const char* file);
 
 		void setPath(std::vector<Location*> path);
+
+		void setStartAndEnd(Location* start, Location* end);
+
+		void setWayPoints(std::vector<Location*> wayPoints);
 
 private:
 			LoadManager loadManager;

@@ -91,12 +91,19 @@ std::vector<AlgoNode*> PathPlannerAlgo::getNeighborsNodes(AlgoNode* current) {
 		if((visitedNodes.count(std::make_pair(newX,newY)) == 1) &&
 			(visitedNodes[std::make_pair(newX,newY)].second == PathPlannerAlgo::OPEN_NODE)){
 
-			if(visitedNodes[std::make_pair(newX,newY)].first->getGrade() < newG ) {
+			int tempHGrade = visitedNodes[std::make_pair(newX,newY)].first->calcFixingHGrade(_endLocation);
+
+			if(visitedNodes[std::make_pair(newX,newY)].first->getGrade() < (newG + tempHGrade) ) {
 				continue;
 			}
 			else {
-				visitedNodes[std::make_pair(newX,newY)].first->setGGrade(newG);
-				visitedNodes[std::make_pair(newX,newY)].first->calcFixingHGrade(_endLocation);
+				if((visitedNodes[std::make_pair(newX,newY)].first->getGrade() == (newG + tempHGrade)) &&
+				   (visitedNodes[std::make_pair(newX,newY)].first->getHGrade() < tempHGrade)) {
+					continue;
+				} else {
+					visitedNodes[std::make_pair(newX,newY)].first->setGGrade(newG);
+					visitedNodes[std::make_pair(newX,newY)].first->reGenerateGrade(_endLocation);
+				}
 			}
 
 		} else {

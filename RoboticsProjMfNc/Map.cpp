@@ -227,6 +227,18 @@
 		}
     }
 
+    void Map::setWayPoints(std::vector<Location*> wayPoints) {
+		for(int i = 0; i < wayPoints.size(); i++)
+		{
+			RoboWorldGrid->setCellState(wayPoints[i]->getX(),wayPoints[i]->getY(), WAY_POINT_CELL);
+		}
+    }
+
+    void Map::setStartAndEnd(Location* start, Location* end) {
+		RoboWorldGrid->setCellState(start->getX(),start->getY(), START_CELL);
+		RoboWorldGrid->setCellState(end->getX(),end->getY(), END_CELL);
+    }
+
     void Map::PrintPng(const char* file) {
     	printToPng(RoboWorldGrid, file);
     }

@@ -1,8 +1,12 @@
-/*
+/**
  * Grid.cpp
  *
- *  Created on: Jul 19, 2015
- *      Author: colman
+ *  Purpose: representing grid matrix of int.
+ *  Gives comfortable access to data.
+
+ *  Created on: Jul 24, 2015
+ *  @author:    MaromF NoaC
+ *  @version:   1.0
  */
 
 #include "Grid.h"

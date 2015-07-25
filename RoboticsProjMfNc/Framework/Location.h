@@ -52,6 +52,9 @@ public:
 	*/
     void setY(int yCoord);
 
+    /*
+     * Compare operator
+     */
     bool operator== (Location* b) const;
 };
 

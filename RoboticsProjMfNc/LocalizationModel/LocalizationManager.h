@@ -15,13 +15,13 @@ using namespace std;
 
 class LocalizationManager {
 private:
-    vector<Particle*> _particles;
+    std::vector<Particle*> _particles;
 
 public:
 	LocalizationManager();
 	void update(double deltaX, double deltaY, double deltaYaw);
 	void resampleParticles();
-	Particle *getBestParticle();
+	//Particle *getBestParticle();
 
 	virtual ~LocalizationManager();
 };

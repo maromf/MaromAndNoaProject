@@ -37,7 +37,7 @@ int AlgoNode::getGrade(){
 }
 
 void AlgoNode::reGenerateGrade(Location* end) {
-	calcFixingHGrade(end);
+	_HGrade = calcFixingHGrade(end);
 }
 
 void AlgoNode::calcRecorsiveHGrade(Location* end){
@@ -57,7 +57,7 @@ int AlgoNode::recorsiveHGrade(Location* end) {
 	}
 }
 
-void AlgoNode::calcFixingHGrade(Location* end){
+int AlgoNode::calcFixingHGrade(Location* end){
 	int deltaY = abs(end->getY() - _currentPosition->getY());
 	int deltaX = abs(end->getX() - _currentPosition->getX());
 
@@ -75,7 +75,7 @@ void AlgoNode::calcFixingHGrade(Location* end){
 		int diagonalFactor = (deltaY < deltaX)?deltaY:deltaX;
 	}
 
-	_HGrade = ((diractFactor * DIRECT_MOV_SCORE) + (diagonalFactor * DIAGONAL_MOV_SCORE));
+	return ((diractFactor * DIRECT_MOV_SCORE) + (diagonalFactor * DIAGONAL_MOV_SCORE));
 }
 
 

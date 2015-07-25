@@ -14,10 +14,10 @@ using namespace std;
 
 class Waypoints {
 private:
-	vector<Location*> _waypoints;
+	std::vector<Location*> _waypoints;
 public:
-	Waypoints(vector<Location*> astarVector);
-	vector<Location*> getWaypoint();
+	Waypoints(std::vector<Location*>* astarVector);
+	std::vector<Location*> getWaypoint();
 };
 
 #endif /* WAYPOINTS_H_ */

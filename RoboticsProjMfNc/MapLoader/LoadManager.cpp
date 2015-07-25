@@ -87,6 +87,7 @@
 	{
 		int freeCellInt = FREE_CELL;
 		int pathCellInt = PATH_CELL;
+		int wayPointCellInt = WAY_POINT_CELL;
 		int startCellInt = START_CELL;
 		int endCellInt = END_CELL;
 
@@ -110,6 +111,11 @@
 					imageToSave.push_back(0);
 					imageToSave.push_back(255);
 					imageToSave.push_back(64);
+					imageToSave.push_back(255);
+				} else if (grid->getCellState(j,i) == wayPointCellInt){
+					imageToSave.push_back(64);
+					imageToSave.push_back(128);
+					imageToSave.push_back(128);
 					imageToSave.push_back(255);
 				} else if (grid->getCellState(j,i) == startCellInt){
 					imageToSave.push_back(0);
