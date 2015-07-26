@@ -9,13 +9,16 @@
 #define GOTO_H_
 
 #include "Behavior.h"
+#include "../LocalizationModel/LocalizationManager.h"
 
 class GoTo: public Behavior {
 private:
+	LocalizationManager* _localManager;
 	Location* _goal;
+	double _yaw;
 
 public:
-	GoTo(Robot* robot, Location* goal);
+	GoTo(Robot* robot, LocalizationManager* localManager, Location* goal);
 	virtual ~GoTo();
 
 	virtual bool startCond();

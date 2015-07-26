@@ -30,3 +30,8 @@ double Utils::radiansToDegrees(double radians)
 
 	return yaw;
 }
+
+double Utils::calcYaw(Location* curPos, Location* goal)
+{
+	return 0;
+}

@@ -7,12 +7,28 @@
 
 #include "GoTo.h"
 
-GoTo::GoTo(Robot* robot, Location* goal) : Behavior(robot){
+GoTo::GoTo(Robot* robot, LocalizationManager* localManager, Location* goal) : Behavior(robot){
+	_localManager = localManager;
 	_goal = goal;
-
+	_yaw = Utils::calcYaw(_robot->getCurrentLocation(), _goal);
 }
 
 GoTo::~GoTo() {
-	// TODO Auto-generated destructor stub
+	delete[] _goal;
 }
 
+bool GoTo::startCond()
+{
+
+	return true;
+}
+
+bool GoTo::stopCond()
+{
+	return true;
+}
+
+void GoTo::action()
+{
+
+}

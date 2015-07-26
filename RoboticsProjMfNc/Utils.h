@@ -9,6 +9,7 @@
 #define UTILS_H_
 
 #include <cmath>
+#include "Framework/Location.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ public:
 	static int degreesToIndex(int degrees);
 	static double degreesToRadians(double degrees);
 	static double radiansToDegrees(double radians);
+	static double calcYaw(Location* curPos, Location* goal);
 };
 
 #endif /* UTILS_H_ */
