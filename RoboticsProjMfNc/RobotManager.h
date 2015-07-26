@@ -10,22 +10,28 @@
 
 #include <libplayerc++/playerc++.h>
 #include <iostream>
+#include <vector>
 #include "Robot.h"
 #include "Map.h"
+#include "Utils.h"
 #include "Framework/Location.h"
-#include "PathAlgorithem/PathPlannerAlgo.h"
+#include "LocalizationModel/LocalizationManager.h"
 #include "ConfigManager.h"
+
+using namespace std;
 
 class RobotManager {
 public:
-	RobotManager(Robot* robot, Map* map);
+	RobotManager(Robot* robot, Map* map, LocalizationManager* localization, std::vector<Location*> points);
 	bool configRobot();
-	void startRobot();
+	bool startRobot();
 	virtual ~RobotManager();
 
 private:
 	Map* _map;
 	Robot* _robot;
+	LocalizationManager* _localization;
+    std::vector<Location*> _points;
 };
 
 

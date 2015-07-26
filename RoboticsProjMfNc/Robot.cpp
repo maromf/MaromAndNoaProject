@@ -11,6 +11,7 @@
 		_lastX = _pp.GetXPos();
 		_lastY = _pp.GetYPos();
 		_lastYaw = _pp.GetYaw();
+		_position = new Location(_pp.GetXPos(),_pp.GetYPos());
 	}
 
 	Robot::~Robot() {
@@ -24,12 +25,12 @@
 
 	float Robot::getX()
 	{
-		return _pp.GetXPos();
+		return _position->getX();
 	}
 
 	float Robot::getY()
 	{
-		return _pp.GetYPos();
+		return _position->getY();
 	}
 
 	float Robot::getYaw()
@@ -43,14 +44,24 @@
 		return cur;
 	}
 
-	float* Robot::getLaserScan()
+	std::vector<double>* Robot::getLaserScan()
 	{
-		float *scan = new float[_lp.GetCount()];
+		std::vector<double>* scan = new std::vector<double>(_lp.GetCount());
 		for (unsigned int i = 0; i < _lp.GetCount(); i++)
 		{
-			scan[i] = _lp[i];
+			scan->push_back(_lp[i]);
 		}
 		return scan;
+	}
+
+	void Robot::invokeRead(){
+	 for (int i = 0; i < 2; i++)
+			_pc.Read();
+
+	}
+
+	bool Robot::isAt(Location* point, double delta) {
+		return (_position->getDistance(point) <= delta);
 	}
 
 	double Robot::getLaserDistance(int index) {

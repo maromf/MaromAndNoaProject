@@ -9,8 +9,11 @@
 #define MOVEFORWARD_H_
 
 #include "Behavior.h"
+#include <vector>
 
-	class MoveForward : Behavior {
+using namespace std;
+
+class MoveForward : Behavior {
 	private:
 		bool checkObstacleInFront();
 		Location* _goal;

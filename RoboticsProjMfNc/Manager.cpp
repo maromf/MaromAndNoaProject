@@ -13,6 +13,8 @@ Manager::Manager(Robot* robot, ConfigManager* config) {
 	_end = 0;
 	_start = 0;
     _map = 0;
+    _roboManager = 0;
+    _localization = 0;
 }
 
 bool Manager::initialize() {
@@ -30,11 +32,14 @@ bool Manager::initialize() {
 
 	_points = wP->getWaypoint();
 
+	_localization = new LocalizationManager();
+
+	_roboManager = new RobotManager(_robot, _map, _localization, _points);
 	return (_path.size() != 0);
 }
 
 bool Manager::startRuning() {
-   return true;
+   return _roboManager->startRobot();
 }
 
 void Manager::finish(const char* file) {

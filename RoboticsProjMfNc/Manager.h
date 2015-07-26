@@ -12,10 +12,12 @@
 #include <libplayerc++/playerc++.h>
 #include "Robot.h"
 #include "Map.h"
+#include "LocalizationModel/LocalizationManager.h"
 #include <vector>
 #include <iostream>
 #include "Framework/Location.h"
 #include "Framework/Waypoints.h"
+#include "RobotManager.h"
 #include "PathAlgorithem/PathPlannerAlgo.h"
 #include "ConfigManager.h"
 #include "Framework/Location.h"
@@ -38,6 +40,8 @@ private:
 	std::vector<Location*> _points;
 	ConfigManager* _configuration;
 	std::vector<Location*> _path;
+	RobotManager* _roboManager;
+	LocalizationManager* _localization;
 };
 
 

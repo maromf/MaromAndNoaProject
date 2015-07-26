@@ -25,11 +25,11 @@
 		int minIndex = _robot->deg_to_index(MIN_ANGLE);
 		int maxIndex = _robot->deg_to_index(MAX_ANGLE);
 
-		float *scan = _robot->getLaserScan();
+		std::vector<double>* scan = _robot->getLaserScan();
 
 		for (int i = minIndex; i <= maxIndex; i++)
 		{
-			if (scan[i] < MAX_DIST_TO_OBSTACLE)
+			if (scan->at(i) < MAX_DIST_TO_OBSTACLE)
 			{
 				isObstacleInFront = true;
 				break;

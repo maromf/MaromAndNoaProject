@@ -27,6 +27,7 @@ using namespace PlayerCc;
 		if(manager->initialize()) {
 			if(manager->startRuning()) {
 				manager->finish("Player/FinalPath.png");
+				cout << "Running was ended successfully!";
 			} else {
                cout << "Running was unsuccessful, robot was not reached his destination!";
 			}

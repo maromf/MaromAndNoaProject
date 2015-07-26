@@ -10,6 +10,7 @@
 
 #include <libplayerc++/playerc++.h>
 #include <string>
+#include <vector>
 #include "Framework/Location.h"
 using namespace PlayerCc;
 using namespace std;
@@ -19,6 +20,7 @@ class Robot {
 		PlayerClient _pc;
 		Position2dProxy _pp;
 		LaserProxy _lp;
+		Location* _position;
 		float _lastX, _lastY, _lastYaw;
 
 	public:
@@ -29,10 +31,12 @@ class Robot {
 		float getX();
 		float getY();
 		float getYaw();
+		void invokeRead();
+		bool isAt(Location* point, double delta);
 		Location* getCurrentLocation();
 		double getLaserDistance(int index);
 
-		float* getLaserScan();
+		std::vector<double>* getLaserScan();
 		int deg_to_index(double deg);
 };
 
