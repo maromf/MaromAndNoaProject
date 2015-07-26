@@ -11,11 +11,8 @@
 #define MAX_DIST_TO_OBSTACLE 0.5
 #define FORWARD_SPEED 0.5
 
-#include "MoveForward.h"
-
-	MoveForward::MoveForward(Robot *robot) : Behavior(robot) {
-		// TODO Auto-generated constructor stub
-
+	MoveForward::MoveForward(Robot *robot, Location *goal) : Behavior(robot) {
+		_goal = goal;
 	}
 
 	MoveForward::~MoveForward() {
@@ -45,12 +42,26 @@
 
 	bool MoveForward::startCond()
 	{
-		return !checkObstacleInFront();
+		cout << "Moving forward!" << endl;
+		return true;
 	}
 
 	bool MoveForward::stopCond()
 	{
-		return checkObstacleInFront();
+		if (_robot->getCurrentLocation()->getDistance(_goal) <= Utils::COMPROMISED_DISTANCE)
+				return true;
+
+		for (int i = Utils::degreesToIndex((Utils::TOTAL_DEGREES / 2) - 25);
+		  	 i < Utils::degreesToIndex((Utils::TOTAL_DEGREES / 2) + 25);
+			 i += Utils::degreesToIndex(3))
+		{
+			if (_robot->getLaserDistance(i) < Utils::MINIMUM_DISTANCE_FROM_WALL)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	void MoveForward::action()

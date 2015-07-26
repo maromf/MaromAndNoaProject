@@ -9,14 +9,14 @@
 #define MOVEFORWARD_H_
 
 #include "Behavior.h"
-#include "../Robot.h"
 
 	class MoveForward : Behavior {
 	private:
 		bool checkObstacleInFront();
+		Location* _goal;
 
 	public:
-		MoveForward(Robot *robot);
+		MoveForward(Robot *robot, Location *goal);
 		virtual ~MoveForward();
 
 		virtual bool startCond();

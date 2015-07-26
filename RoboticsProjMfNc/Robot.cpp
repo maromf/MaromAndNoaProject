@@ -37,6 +37,12 @@
 		return _pp.GetYaw();
 	}
 
+	Location* Robot::getCurrentLocation()
+	{
+		Location* cur = new Location(getX(), getY());
+		return cur;
+	}
+
 	float* Robot::getLaserScan()
 	{
 		float *scan = new float[_lp.GetCount()];
@@ -45,6 +51,10 @@
 			scan[i] = _lp[i];
 		}
 		return scan;
+	}
+
+	double Robot::getLaserDistance(int index) {
+		return _lp.GetRange(index);
 	}
 
 	int Robot::deg_to_index(double deg)

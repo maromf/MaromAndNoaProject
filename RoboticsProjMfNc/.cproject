@@ -3,7 +3,9 @@
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.cross.exe.debug.431844364">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cross.exe.debug.431844364" moduleId="org.eclipse.cdt.core.settings" name="Debug">
-				<externalSettings/>
+				<externalSettings>
+					<externalSetting/>
+				</externalSettings>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
@@ -22,6 +24,14 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.361184195" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.200053715" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.include.paths.1973606984" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.7"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.7/backward"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu/c++/4.7"/>
+									<listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.7/include"/>
+									<listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.7/include-fixed"/>
+									<listOptionValue builtIn="false" value="/usr/local/include"/>
 									<listOptionValue builtIn="false" value="/usr/local/include/player-2.0"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.optimization.level.814192153" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>

@@ -10,6 +10,7 @@
 
 #include <libplayerc++/playerc++.h>
 #include <string>
+#include "Framework/Location.h"
 using namespace PlayerCc;
 using namespace std;
 
@@ -28,6 +29,8 @@ class Robot {
 		float getX();
 		float getY();
 		float getYaw();
+		Location* getCurrentLocation();
+		double getLaserDistance(int index);
 
 		float* getLaserScan();
 		int deg_to_index(double deg);

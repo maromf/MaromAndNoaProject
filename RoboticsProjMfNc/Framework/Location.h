@@ -12,6 +12,7 @@
 #ifndef LOCATION_H_
 #define LOCATION_H_
 
+#include <cmath>
 
 class Location {
 private:
@@ -52,10 +53,14 @@ public:
 	*/
     void setY(int yCoord);
 
+    double getDistance(Location* b);
+
     /*
      * Compare operator
      */
     bool operator== (Location* b) const;
+
+    bool operator!= (Location* b) const;
 };
 
 

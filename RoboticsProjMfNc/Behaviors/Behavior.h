@@ -1,6 +1,7 @@
 #include "../Robot.h"
 #include <vector>
-#include "../Robot.h"
+#include "../Framework/Location.h"
+#include "../Utils.h"
 using namespace std;
 
 	class Behavior {

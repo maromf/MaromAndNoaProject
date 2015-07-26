@@ -41,11 +41,20 @@
 		  y = yCoord;
 	}
 
+	double Location::getDistance(Location *b)
+	{
+		double aSide = pow(x - b->getX(), 2);
+		double bSide = pow(y - b->getY(), 2);
+
+		return sqrt(aSide + bSide);
+	}
+
 	bool Location::operator== (Location* b) const {
-		if((x - b->getX()) && (y == b->getY()))
-			return true;
-		else{
-			return false;
-		}
+		return ((x == b->getX()) && (y == b->getY()));
+	}
+
+	bool Location::operator !=(Location* b) const
+	{
+		return ((x != b->getX()) || (y != b->getY()));
 	}
 
