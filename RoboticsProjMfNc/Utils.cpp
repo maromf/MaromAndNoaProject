@@ -33,5 +33,7 @@ double Utils::radiansToDegrees(double radians)
 
 double Utils::calcYaw(Location* curPos, Location* goal)
 {
-	return 0;
+	double dx = curPos->getX() - goal->getX();
+	double dy = curPos->getY() - goal->getY();
+	return radiansToDegrees(atan2(dx, dy));
 }
