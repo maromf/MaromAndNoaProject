@@ -23,10 +23,18 @@ bool Turn::startCond()
 
 bool Turn::stopCond()
 {
-	return true;
+	double yawDelta = _yaw - _robot->getYaw();
+	return (_yaw == _robot->getYaw() || yawDelta <= Utils::COMPROMISED_YAW);
 }
 
 void Turn::action()
 {
-	_robot->setSpeed(0, 0);
+	int leftRightMark = 1;
+
+	if (_yaw - _robot->getYaw() < 0)
+	{
+		leftRightMark = -1;
+	}
+
+	_robot->setSpeed(0, leftRightMark * Utils::YAW_TURN_DELTA);
 }
