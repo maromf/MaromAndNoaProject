@@ -17,6 +17,7 @@
 #include "Framework/Location.h"
 #include "LocalizationModel/LocalizationManager.h"
 #include "ConfigManager.h"
+#include "Behaviors/GoTo.h"
 
 using namespace std;
 

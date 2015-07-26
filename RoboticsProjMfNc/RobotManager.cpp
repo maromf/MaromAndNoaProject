@@ -25,22 +25,22 @@ bool RobotManager::startRobot(){
 	if(!configRobot())
 		return false;
 
-	for (int i = 0; i < _points.size(); i++) {
+	for (unsigned int i = 0; i < _points.size(); i++) {
 		Location* currPoint = _points[i];
-		//GoTo* behavior;
+		GoTo* behavior;
 
 		_robot->invokeRead();
 
 		while (_robot->isAt(currPoint,Utils::WAY_POINT_CONCER_DELTA)) {
-		//	behavior = new GoTo(_robot, _localizationManager, currPoint);
+			behavior = new GoTo(_robot, _localization, currPoint);
 
 			_robot->invokeRead();
 
-		//	if (behavior->startCondition()) {
-		//		while (!behavior->stopCondition()) {
-		//			behavior->action();
-		//		}
-		//	}
+			if (behavior->startCond()) {
+				while (!behavior->stopCond()) {
+					behavior->action();
+				}
+			}
 		}
 	}
 

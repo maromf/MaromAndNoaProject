@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include "Framework/Location.h"
+#include "Utils.h"
 using namespace PlayerCc;
 using namespace std;
 
@@ -22,6 +23,8 @@ class Robot {
 		LaserProxy _lp;
 		Location* _position;
 		float _lastX, _lastY, _lastYaw;
+
+		void configRobot();
 
 	public:
 		Robot(string ip, int port);

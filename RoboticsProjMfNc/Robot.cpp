@@ -12,6 +12,17 @@
 		_lastY = _pp.GetYPos();
 		_lastYaw = _pp.GetYaw();
 		_position = new Location(_pp.GetXPos(),_pp.GetYPos());
+
+		configRobot();
+	}
+
+	void Robot::configRobot() {
+
+		_pp.SetMotorEnable(true);
+
+		// Fix reading BUG
+		for(int i = 0; i < 15; i++)
+			invokeRead();
 	}
 
 	Robot::~Robot() {
@@ -35,7 +46,7 @@
 
 	float Robot::getYaw()
 	{
-		return _pp.GetYaw();
+		return Utils::NegativeYawToPositive(_pp.GetYaw());
 	}
 
 	Location* Robot::getCurrentLocation()
