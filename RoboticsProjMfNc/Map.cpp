@@ -10,12 +10,12 @@
  */
 
 #include "Map.h"
-	Map::Map(char* path) {
+	Map::Map(const char* path) {
 		_RatioRoboToReal = 1;
 		generateImageGrid(path);
 	}
 
-    void Map::generateImageGrid(char* path) {
+    void Map::generateImageGrid(const char* path) {
 
 
     	// Generates grid out of the image.
@@ -38,15 +38,9 @@
 		// activate spending occupied cells in grid.
 		wallThicking(realWorldGrid, pixelsResulotion, roboSizeX, roboSizeY);
 
-		printToPng(realWorldGrid, "Player/WallThicking.png");
-
 
 		// fit grid resolution.
 		RoboWorldGrid = fitResolution(realWorldGrid, pixelsResulotion, roboWorldResulotion);
-
-//		printToConsole(RoboWorldGrid);
-
-		printToPng(RoboWorldGrid, "Player/Resolution.png");
     }
 
 	int Map::getHeight() {

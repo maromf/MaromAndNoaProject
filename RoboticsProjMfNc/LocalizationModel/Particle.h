@@ -8,15 +8,24 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
 
+#include "../Map.h"
+#include <vector>
+
+using namespace std;
 
 class Particle {
 private:
 	double _xPos, _yPos, _yaw;
 	double _bel;
+	Map* _map;
+
+	double ProbByMesu(std::vector<double> laserScan);
+
 public:
-	Particle(double xPos, double yPos, double yaw);
-	//double getBelief();
-	//void update(double deltaX, double deltaY, double deltaYaw);
+	Particle(double xPos, double yPos, double yaw, Map* map);
+	double getBelief();
+	void update(double deltaX, double deltaY, double deltaYaw, std::vector<double> laserArr);
+
 	//void printPosition();
 	virtual ~Particle();
 };

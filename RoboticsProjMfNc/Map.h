@@ -30,7 +30,7 @@ class Map {
 	static const int END_CELL = 6;
 
 	public:
-		Map(char* path);            // Ctor
+		Map(const char* path);            // Ctor
 		virtual ~Map();   // Dtor
 
 		/**
@@ -38,7 +38,7 @@ class Map {
 		    The method gets the image file from the configuration model, reads its and transforms it into grid.
 		    The method build the grid according to the given resolution from the configuration model.
 		*/
-		void generateImageGrid(char* path);
+		void generateImageGrid(const char* path);
 
 		/**
 		    This method gets a grid, pixelResulotion and the robot size.

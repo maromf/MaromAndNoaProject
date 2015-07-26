@@ -28,7 +28,7 @@
 	void LoadManager::loadImage(const char* filename)
 	{
 		std::vector<unsigned char> picFile;
-		string str("Player/roboticLabMap.png");
+		string str(filename);
 
 	  //decode
 		lodepng::load_file(picFile,str);
@@ -65,7 +65,6 @@
 
 		Grid* grid = new Grid(IMAGE_PIXLE_COLUMNS,IMAGE_PIXLE_ROWS);
 
-		//grid = new std::vector<std::vector<int> >(IMAGE_PIXLE_COLUMNS, std::vector<int>(IMAGE_PIXLE_ROWS));
 		for(unsigned i = 0; i < IMAGE_PIXLE_ROWS * IMAGE_PIXLE_COLUMNS * PIXEL_LENGHT; i += PIXEL_LENGHT)
 		{
 			int state = ((image[i] != 255) || (image[i + 1] != 255) || (image[i + 2] != 255))
@@ -75,9 +74,6 @@
 
 			grid->setCellState(x,y, state);
 
-//			(*grid)[(i / 4) % IMAGE_PIXLE_COLUMNS][(i / 4) / IMAGE_PIXLE_COLUMNS] =
-//					((image[i] != 255) || (image[i + 1] != 255) || (image[i + 2] != 255))
-//					?(occupiedCellInt):(freeCellInt);
 		}
 
 		return grid;

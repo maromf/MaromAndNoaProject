@@ -113,6 +113,8 @@ vector<string> ConfigManager::splitline(string str)
 	vector<string> splitted;
 	size_t pos;
 
+	str.erase(str.find_last_not_of(" \n\r\t")+1);
+
 	// put the values in vector - separate relays on spaces.
 	// loop end when there is no more spaces.
 	while ((pos = str.find_first_of(" ")) != string::npos)
