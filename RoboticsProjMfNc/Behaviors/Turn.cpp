@@ -11,17 +11,17 @@ Turn::Turn(Robot *robot, float yaw) : Behavior(robot) {
 	_yaw = yaw;
 }
 
-Turn::~Turn() {
-	// TODO Auto-generated destructor stub
-}
-
 bool Turn::startCond()
 {
-	cout << "Turning" << endl;
-	return true;
+	return !inPosition();
 }
 
 bool Turn::stopCond()
+{
+	return inPosition();
+}
+
+bool Turn::inPosition()
 {
 	double yawDelta = _yaw - _robot->getYaw();
 	return (_yaw == _robot->getYaw() || yawDelta <= Utils::COMPROMISED_YAW);

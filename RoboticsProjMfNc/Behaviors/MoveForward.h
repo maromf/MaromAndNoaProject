@@ -13,10 +13,13 @@
 
 using namespace std;
 
-class MoveForward : Behavior {
+class MoveForward : public Behavior {
 	private:
-		bool checkObstacleInFront();
+		//bool checkObstacleInFront();
 		Location* _goal;
+
+		bool checkObstacles();
+		bool atGoalLocation();
 
 	public:
 		MoveForward(Robot *robot, Location *goal);

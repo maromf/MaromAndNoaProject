@@ -14,7 +14,7 @@
 	Behavior *Behavior::selectNext() {
 		for (unsigned int i = 0; i < _nextBehaviors.size(); i++)
 		{
-			if (_nextBehaviors[i]->startCond())
+			if (((Behavior*)_nextBehaviors[i])->startCond())
 				return _nextBehaviors[i];
 		}
 		return NULL;

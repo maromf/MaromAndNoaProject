@@ -11,16 +11,17 @@
 #include "Behavior.h"
 #include "../Robot.h"
 
-class Turn : Behavior {
+class Turn : public Behavior {
 private:
 	float _yaw;
 public:
 	Turn(Robot * robot, float yaw);
-	virtual ~Turn();
 
 	virtual bool startCond();
 	virtual bool stopCond();
 	virtual void action();
+
+	bool inPosition();
 };
 
 #endif /* TURN_H_ */

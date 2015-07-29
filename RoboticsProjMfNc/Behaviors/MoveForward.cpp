@@ -11,15 +11,15 @@
 #define MAX_DIST_TO_OBSTACLE 0.5
 #define FORWARD_SPEED 0.5
 
-	MoveForward::MoveForward(Robot *robot, Location *goal) : Behavior(robot) {
-		_goal = goal;
-	}
+MoveForward::MoveForward(Robot *robot, Location *goal) : Behavior(robot) {
+	_goal = goal;
+}
 
-	MoveForward::~MoveForward() {
-		// TODO Auto-generated destructor stub
-	}
+MoveForward::~MoveForward() {
+	delete[] _goal;
+}
 
-	bool MoveForward::checkObstacleInFront()
+	/*bool MoveForward::checkObstacleInFront()
 	{
 		bool isObstacleInFront = false;
 		int minIndex = _robot->deg_to_index(MIN_ANGLE);
@@ -37,21 +37,23 @@
 		}
 
 		return isObstacleInFront;
-	}
+	}*/
 
 
-	bool MoveForward::startCond()
-	{
-		cout << "Moving forward!" << endl;
-		return true;
-	}
+bool MoveForward::startCond()
+{
+	return !atGoalLocation() && !checkObstacles();
+}
 
-	bool MoveForward::stopCond()
-	{
-		if (_robot->getCurrentLocation()->getDistance(_goal) <= Utils::COMPROMISED_DISTANCE)
-				return true;
+bool MoveForward::stopCond()
+{
+	return checkObstacles() || atGoalLocation();
+}
 
-		for (int i = Utils::degreesToIndex((Utils::TOTAL_DEGREES / 2) - 25);
+// TODO: maybe use the original code up
+bool MoveForward::checkObstacles()
+{
+	for (int i = Utils::degreesToIndex((Utils::TOTAL_DEGREES / 2) - 25);
 		  	 i < Utils::degreesToIndex((Utils::TOTAL_DEGREES / 2) + 25);
 			 i += Utils::degreesToIndex(3))
 		{
@@ -61,11 +63,16 @@
 			}
 		}
 
-		return false;
-	}
+	return false;
+}
 
-	void MoveForward::action()
-	{
-		_robot->setSpeed(FORWARD_SPEED, 0);
-	}
+bool MoveForward::atGoalLocation()
+{
+	return (_robot->getCurrentLocation()->getDistance(_goal) <= Utils::COMPROMISED_DISTANCE);
+}
+
+void MoveForward::action()
+{
+	_robot->setSpeed(FORWARD_SPEED, 0);
+}
 
