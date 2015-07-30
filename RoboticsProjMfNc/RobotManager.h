@@ -24,7 +24,6 @@ using namespace std;
 class RobotManager {
 public:
 	RobotManager(Robot* robot, Map* map, LocalizationManager* localization, std::vector<Location*> points);
-	bool configRobot();
 	bool startRobot();
 	virtual ~RobotManager();
 

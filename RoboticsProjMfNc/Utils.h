@@ -25,6 +25,7 @@ public:
 	static const double YAW_TURN_DELTA = 0.16;
 	static const double MOVEMENT_DELTA = 0.4;
 	static const double WAY_POINT_CONCER_DELTA = 9;
+	static const double METER_TO_CM = 1000;
 
 	static int indexToDegrees(int index);
 	static int degreesToIndex(int degrees);

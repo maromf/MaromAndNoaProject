@@ -12,17 +12,24 @@
 		_lastY = _pp.GetYPos();
 		_lastYaw = _pp.GetYaw();
 		_position = new Location(_pp.GetXPos(),_pp.GetYPos());
-
-		configRobot();
+		_robotRatio = 1;
+		_map = 0;
 	}
 
-	void Robot::configRobot() {
+	bool Robot::configRobot(Map* map) {
+
+		_map = map;
 
 		_pp.SetMotorEnable(true);
+
+		double roboWorldResulotion = ConfigManager::Instance()->getGridResulotionCM();
+		setRatio(roboWorldResulotion);
 
 		// Fix reading BUG
 		for(int i = 0; i < 15; i++)
 			invokeRead();
+
+		return true;
 	}
 
 	Robot::~Robot() {
@@ -55,6 +62,23 @@
 		return cur;
 	}
 
+	void Robot::setRatio(double ratio) {
+		_robotRatio = ratio;
+	}
+
+	void Robot::setOdometry(Location* location, double yaw) {
+		_position = location;
+
+		double robotYaw = Utils::PositiveYawToNegative(yaw);
+
+		invokeRead();
+
+		Location* odoLocation = Utils::PositiveCoordinateLocationToNegative(location,_map->getWidth(), _map->getHeight());
+		double newX = reversFromRobotRatio(odoLocation->getX());
+		double newY = reversFromRobotRatio(odoLocation->getY());
+		_pp.SetOdometry(newX, newY, Utils::degreesToRadians(robotYaw));
+	}
+
 	std::vector<double>* Robot::getLaserScan()
 	{
 		std::vector<double>* scan = new std::vector<double>(_lp.GetCount());
@@ -72,7 +96,22 @@
 	}
 
 	bool Robot::isAt(Location* point, double delta) {
-		return (_position->getDistance(point) <= delta);
+		Location* location;
+		location = setLocationRatio(_pp.GetXPos(), _pp.GetYPos());
+		location = Utils::NegativeCoordinateLocationToPositive(location,_map->getWidth(), _map->getHeight());
+		return (location->getDistance(point) <= delta);
+	}
+
+	Location* Robot::setLocationRatio(double x, double y) {
+		double newX = (x * Utils::METER_TO_CM) / (_robotRatio * 10);
+		double newY = (y * Utils::METER_TO_CM) / (_robotRatio * 10);
+		Location* location = new Location(newX, newY);
+		return location;
+	}
+
+	double Robot::reversFromRobotRatio(int pos) {
+		double newPos = (pos / 10);
+		return newPos;
 	}
 
 	double Robot::getLaserDistance(int index) {

@@ -15,14 +15,10 @@ RobotManager::RobotManager(Robot* robot, Map* map, LocalizationManager* localiza
 	_points = points;
 }
 
-bool RobotManager::configRobot() {
-  return true;
-}
-
 
 bool RobotManager::startRobot(){
 
-	if(!configRobot())
+	if(!_robot->configRobot(_map))
 		return false;
 
 	for (unsigned int i = 0; i < _points.size(); i++) {
