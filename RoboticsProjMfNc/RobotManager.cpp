@@ -27,7 +27,7 @@ bool RobotManager::startRobot(){
 
 		_robot->invokeRead();
 
-		while (_robot->isAt(currPoint,Utils::WAY_POINT_CONCER_DELTA)) {
+		while (!_robot->isAt(currPoint,Utils::WAY_POINT_CONCER_DELTA)) {
 			behavior = new GoTo(_robot, _localization, currPoint);
 
 			_robot->invokeRead();
