@@ -23,8 +23,12 @@ bool Turn::stopCond()
 
 bool Turn::inPosition()
 {
-	double yawDelta = _yaw - _robot->getYaw();
-	return (_yaw == _robot->getYaw() || yawDelta <= Utils::COMPROMISED_YAW);
+	_robot->invokeRead();
+	float r = _robot->getYaw();
+	double yawDelta = _yaw - r;
+	bool n = _yaw == _robot->getYaw();
+	bool d = yawDelta <= Utils::COMPROMISED_YAW;
+	return n || d;
 }
 
 void Turn::action()

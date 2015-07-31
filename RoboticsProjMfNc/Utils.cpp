@@ -35,7 +35,43 @@ double Utils::calcYaw(Location* curPos, Location* goal)
 {
 	double dx = curPos->getX() - goal->getX();
 	double dy = curPos->getY() - goal->getY();
-	return radiansToDegrees(atan2(dx, dy));
+	double n = NegativeYawToPositive(radiansToDegrees(atan2(dx, dy)));
+	double nn = calculateNeededYaw(curPos, goal);
+	return nn;
+}
+
+double Utils::calculateNeededYaw(Location* curPos, Location* goal)
+{
+	double yDeltaToPoint = abs(goal->getY() - curPos->getY());
+	double distanceToPoint = curPos->getDistance(goal);
+	double neededYaw = acos(yDeltaToPoint / distanceToPoint);
+
+	switch(getQuarter(curPos, goal)) {
+		case FIRST:
+			return radiansToDegrees(M_PI_2 - neededYaw);
+		case SECOND:
+			return radiansToDegrees(M_PI - neededYaw);
+		case THIRD:
+			return radiansToDegrees(M_PI + M_PI_2 - neededYaw);
+		case FOURTH:
+			return radiansToDegrees(M_PI * 2 - neededYaw);
+		default:
+			return neededYaw;
+    }
+}
+
+int Utils::getQuarter(Location* pos, Location* goal) {
+	if (pos->getY() > goal->getY()) {
+		if (pos->getX() > goal->getX())
+			return SECOND;
+		else
+			return FIRST;
+	} else {
+		if (pos->getX() > goal->getX())
+			return THIRD;
+		else
+			return FOURTH;
+	}
 }
 
 double Utils::NegativeYawToPositive(double negative)

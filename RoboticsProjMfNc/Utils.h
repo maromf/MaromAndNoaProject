@@ -9,12 +9,15 @@
 #define UTILS_H_
 
 #include <cmath>
+#include  <math.h>
 #include "Framework/Location.h"
 
 using namespace std;
 
 class Utils {
 public:
+	enum Quarter {FIRST = 1, SECOND, THIRD, FOURTH};
+
 	static const double TOTAL_SCAN_SPAN = 666;
 	static const double TOTAL_DEGREES = 240;
 	static const double PAI_DEGREES = 180;
@@ -32,6 +35,8 @@ public:
 	static double degreesToRadians(double degrees);
 	static double radiansToDegrees(double radians);
 	static double calcYaw(Location* curPos, Location* goal);
+	static double calculateNeededYaw(Location* curPos, Location* goal);
+	static int getQuarter(Location* pos, Location* goal);
 	static double NegativeYawToPositive(double negative);
 	static double PositiveYawToNegative(double positive);
 	static Location* NegativeCoordinateLocationToPositive(Location* negative, int width, int height);

@@ -37,9 +37,8 @@ void GoTo::action()
 {
 	while (!atGoalLocation())
 	{
-		initializeBehaviors();
-
 		_robot->invokeRead();
+		initializeBehaviors();
 
 		if (_turn->startCond())
 		{
@@ -47,6 +46,8 @@ void GoTo::action()
 			{
 				_turn->action();
 			}
+
+			_robot->setSpeed((double) 0, (double) 0);
 		}
 
 		_robot->invokeRead();
