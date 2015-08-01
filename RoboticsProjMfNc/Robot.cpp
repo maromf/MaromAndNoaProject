@@ -128,10 +128,7 @@
 	}
 
 	bool Robot::isAt(Location* point, double delta) {
-		Location* location;
-		location = setLocationRatio(_pp.GetXPos(), _pp.GetYPos());
-		location = Utils::NegativeCoordinateLocationToPositive(location,_map->getWidth(), _map->getHeight());
-		return (location->getDistance(point) <= delta);
+		return (_position->getDistance(point) <= delta);
 	}
 
 	Location* Robot::setLocationRatio(double x, double y) {
