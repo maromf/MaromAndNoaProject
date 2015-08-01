@@ -37,6 +37,7 @@ private:
 	Map* _map;
 	Location* _start;
 	Location* _end;
+	double _startYaw;
 	std::vector<Location*> _points;
 	ConfigManager* _configuration;
 	std::vector<Location*> _path;

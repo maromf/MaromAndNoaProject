@@ -15,6 +15,7 @@ Manager::Manager(Robot* robot, ConfigManager* config) {
     _map = 0;
     _roboManager = 0;
     _localization = 0;
+    _startYaw = 0;
 }
 
 bool Manager::initialize() {
@@ -24,6 +25,8 @@ bool Manager::initialize() {
 
 	_start = _map->RealToRobotWorldLocation(*start);
 	_end = _map->RealToRobotWorldLocation(*end);
+
+	_startYaw = _configuration->getStartYaw();
 
 	PathPlannerAlgo* algo = new PathPlannerAlgo(_map,_start);
 	_path = algo->generatePath(_end);
@@ -39,6 +42,10 @@ bool Manager::initialize() {
 }
 
 bool Manager::startRuning() {
+
+	if(!_robot->configRobot(_map, _start, _startYaw))
+		return false;
+
    return _roboManager->startRobot();
 }
 

@@ -8,26 +8,28 @@
 #include "Robot.h"
 	Robot::Robot(string ip, int port) : _pc(ip, port), _pp(&_pc), _lp(&_pc) {
 		// TODO Auto-generated constructor stub
-		_lastX = _pp.GetXPos();
-		_lastY = _pp.GetYPos();
-		_lastYaw = _pp.GetYaw();
-		_position = new Location(_pp.GetXPos(),_pp.GetYPos());
+		_pp.SetMotorEnable(true);
+		_lastYaw = 0;
+		_position = 0;
 		_robotRatio = 1;
 		_map = 0;
 	}
 
-	bool Robot::configRobot(Map* map) {
+	bool Robot::configRobot(Map* map, Location* start, double startYaw) {
 
 		_map = map;
-
-		_pp.SetMotorEnable(true);
 
 		double roboWorldResulotion = ConfigManager::Instance()->getGridResulotionCM();
 		setRatio(roboWorldResulotion);
 
 		// Fix reading BUG
-		for(int i = 0; i < 15; i++)
+		for(int i = 0; i < 15; i++) {
+			setOdometry(start, startYaw);
 			invokeRead();
+		}
+
+		_lastYaw = fitYaw(_pp.GetYaw());
+		_position = fitLocation(_pp.GetXPos(),_pp.GetYPos());
 
 		return true;
 	}
@@ -41,24 +43,45 @@
 		_pp.SetSpeed(linear, angular);
 	}
 
-	float Robot::getX()
-	{
-		return _position->getX();
+	void Robot::setYaw(double yaw) {
+		_lastYaw = yaw;
 	}
 
-	float Robot::getY()
-	{
-		return _position->getY();
+	void Robot::setLocation(Location* location) {
+		_position = location;
 	}
 
-	float Robot::getYaw()
+	double Robot::getX()
 	{
-		return Utils::NegativeYawToPositive(_pp.GetYaw());
+		return _pp.GetXPos();
+	}
+
+	double Robot::getY()
+	{
+		return _pp.GetYPos();
+	}
+
+	double Robot::getYaw()
+	{
+		return _lastYaw;
+	}
+
+	double Robot::fitYaw(double yaw) {
+		double tempYaw = yaw;
+		return Utils::NegativeYawToPositive(Utils::radiansToDegrees(tempYaw));
 	}
 
 	Location* Robot::getCurrentLocation()
 	{
-		Location* cur = new Location(getX(), getY());
+		return _position;
+	}
+
+
+	Location* Robot::fitLocation(int x, int y)
+	{
+		Location* cur;
+		cur = setLocationRatio(x, y);
+		cur = Utils::NegativeCoordinateLocationToPositive(cur,_map->getWidth(), _map->getHeight());
 		return cur;
 	}
 
@@ -68,6 +91,7 @@
 
 	void Robot::setOdometry(Location* location, double yaw) {
 		_position = location;
+		_lastYaw = yaw;
 
 		double robotYaw = Utils::PositiveYawToNegative(yaw);
 
@@ -77,6 +101,14 @@
 		double newX = reversFromRobotRatio(odoLocation->getX());
 		double newY = reversFromRobotRatio(odoLocation->getY());
 		_pp.SetOdometry(newX, newY, Utils::degreesToRadians(robotYaw));
+	}
+
+	Location* Robot::getOdometryLocation() {
+		return fitLocation(getX(), getY());
+	}
+
+	double Robot::getOdometryYaw() {
+		return fitYaw(_pp.GetYaw());
 	}
 
 	std::vector<double>* Robot::getLaserScan()

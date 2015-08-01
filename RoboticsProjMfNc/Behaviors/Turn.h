@@ -10,6 +10,8 @@
 
 #include "Behavior.h"
 #include "../Robot.h"
+#include <cmath>
+#include  <math.h>
 
 class Turn : public Behavior {
 private:

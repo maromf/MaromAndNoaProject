@@ -58,6 +58,7 @@ void GoTo::action()
 			{
 				_moveForward->action();
 			}
+			_robot->setSpeed((double) 0, (double) 0);
 		}
 	}
 }

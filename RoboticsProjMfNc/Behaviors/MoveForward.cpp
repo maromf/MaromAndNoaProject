@@ -68,11 +68,14 @@ bool MoveForward::checkObstacles()
 
 bool MoveForward::atGoalLocation()
 {
-	return (_robot->getCurrentLocation()->getDistance(_goal) <= Utils::COMPROMISED_DISTANCE);
+	return (_robot->isAt(_goal, Utils::COMPROMISED_DISTANCE));
 }
 
 void MoveForward::action()
 {
+	_robot->invokeRead();
 	_robot->setSpeed(FORWARD_SPEED, 0);
+	_robot->invokeRead();
+	_robot->setLocation(_robot->getOdometryLocation());
 }
 

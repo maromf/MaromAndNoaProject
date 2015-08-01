@@ -24,9 +24,9 @@ bool Turn::stopCond()
 bool Turn::inPosition()
 {
 	_robot->invokeRead();
-	float r = _robot->getYaw();
-	double yawDelta = _yaw - r;
-	bool n = _yaw == _robot->getYaw();
+	double r = _robot->getYaw();
+	double yawDelta = abs(_yaw - r);
+	bool n = _yaw == r;
 	bool d = yawDelta <= Utils::COMPROMISED_YAW;
 	return n || d;
 }
@@ -40,5 +40,9 @@ void Turn::action()
 		leftRightMark = -1;
 	}
 
+	_robot->invokeRead();
 	_robot->setSpeed(0, leftRightMark * Utils::YAW_TURN_DELTA);
+	_robot->invokeRead();
+	_robot->setYaw(_robot->getOdometryYaw());
+
 }

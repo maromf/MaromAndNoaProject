@@ -18,9 +18,6 @@ RobotManager::RobotManager(Robot* robot, Map* map, LocalizationManager* localiza
 
 bool RobotManager::startRobot(){
 
-	if(!_robot->configRobot(_map))
-		return false;
-
 	for (unsigned int i = 0; i < _points.size(); i++) {
 		Location* currPoint = _points[i];
 		GoTo* behavior;
