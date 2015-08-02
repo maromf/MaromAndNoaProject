@@ -9,7 +9,7 @@
 #define MIN_ANGLE -30
 #define MAX_ANGLE 30
 #define MAX_DIST_TO_OBSTACLE 0.5
-#define FORWARD_SPEED 0.5
+#define FORWARD_SPEED 0.3
 
 MoveForward::MoveForward(Robot *robot, Location *goal) : Behavior(robot) {
 	_goal = goal;
@@ -68,7 +68,7 @@ bool MoveForward::checkObstacles()
 
 bool MoveForward::atGoalLocation()
 {
-	return (_robot->isAt(_goal, Utils::COMPROMISED_DISTANCE));
+	return (_robot->isAt(_goal, Utils::WAY_POINT_CONCER_DELTA));
 }
 
 void MoveForward::action()

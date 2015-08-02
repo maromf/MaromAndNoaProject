@@ -28,14 +28,14 @@ class Robot {
 		Map* _map;
 
 		double fitYaw(double yaw);
-		Location* fitLocation(int x, int y);
+		Location* fitLocation(double x, double y);
 
 		double getX();
 		double getY();
 
 		Location* setLocationRatio(double x, double y);
 
-		double reversFromRobotRatio(int pos);
+		double reversFromRobotRatio(double pos);
 
 
 
@@ -44,7 +44,7 @@ class Robot {
 		virtual ~Robot();
 
 		bool configRobot(Map* map, Location* start, double startYaw);
-		void setSpeed(float linear, float angular);
+		void setSpeed(double linear, double angular);
 		double getYaw();
 		void invokeRead();
 		bool isAt(Location* point, double delta);

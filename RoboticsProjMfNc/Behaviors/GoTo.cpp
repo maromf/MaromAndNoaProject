@@ -20,7 +20,7 @@ GoTo::~GoTo() {
 
 bool GoTo::atGoalLocation()
 {
-	return (_robot->getCurrentLocation()->getDistance(_goal) <= Utils::COMPROMISED_DISTANCE);
+	return (_robot->isAt(_goal , Utils::WAY_POINT_CONCER_DELTA));
 }
 
 bool GoTo::startCond()

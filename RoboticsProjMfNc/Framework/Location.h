@@ -16,12 +16,12 @@
 
 class Location {
 private:
-	int x;  // Indicates the position X coordinate.
-	int y;  // Indicates the position Y coordinate.
+	double x;  // Indicates the position X coordinate.
+	double y;  // Indicates the position Y coordinate.
 
 public:
 
-	Location(int xCoord, int yCoord); // Ctor
+	Location(double xCoord, double yCoord); // Ctor
 	Location();
 	virtual ~Location();              // Dtor
 
@@ -30,28 +30,28 @@ public:
 
 	    @return The X coordinate (int).
 	*/
-	int getX();
+	double getX();
 
 	/**
 	    Returns the Y coordinate.
 
 	    @return The Y coordinate (int).
 	*/
-	int getY();
+	double getY();
 
 	/**
 	    Sets the Location X coordinate.
 
 	    @param xCoord - The X coordinate.
 	*/
-	void setX(int xCoord);
+	void setX(double xCoord);
 
 	/**
 	    Sets the Location Y coordinate.
 
 	    @param xCoord - The Y coordinate.
 	*/
-    void setY(int yCoord);
+    void setY(double yCoord);
 
     double getDistance(Location* b);
 

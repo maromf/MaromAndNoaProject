@@ -11,7 +11,7 @@
 
 #include "Location.h"
 
-	Location::Location(int xCoord, int yCoord) {
+	Location::Location(double xCoord, double yCoord) {
 			setX(xCoord);
 			setY(yCoord);
 	}
@@ -25,19 +25,19 @@
 		// TODO Auto-generated destructor stub
 	}
 
-	int Location::getX(){
+	double Location::getX(){
 		return x;
 	}
 
-	int Location::getY(){
+	double Location::getY(){
 		  return y;
 	}
 
-	void Location::setX(int xCoord){
+	void Location::setX(double xCoord){
 		  x = xCoord;
 	}
 
-	void Location::setY(int yCoord){
+	void Location::setY(double yCoord){
 		  y = yCoord;
 	}
 

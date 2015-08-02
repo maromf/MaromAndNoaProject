@@ -60,16 +60,16 @@
 	}
 
 	Location* Map::RobotWorldToRealLocation(Location location) {
-		int newX = location.getX() * _RatioRoboToReal;
-		int newY = location.getY() * _RatioRoboToReal;
+		double newX = location.getX() * _RatioRoboToReal;
+		double newY = location.getY() * _RatioRoboToReal;
 
 		Location* roboLocation = new Location(newX, newY);
 		return roboLocation;
 	}
 
 	Location* Map::RealToRobotWorldLocation(Location location) {
-		int newX = location.getX() / _RatioRoboToReal;
-		int newY = location.getY() / _RatioRoboToReal;
+		double newX = floor(location.getX() / _RatioRoboToReal);
+		double newY = floor(location.getY() / _RatioRoboToReal);
 
 		Location* realLocation = new Location(newX, newY);
 		return realLocation;
@@ -167,11 +167,11 @@
 		for (int i = 0; i < newRowsLenght; i++)
 		{
 			// Get the Y coordinate of the real world out of the robot grid x index.
-			int realWorldY = ((int)(i * roboWorldRatio)) ;
+			double realWorldY = (i * roboWorldRatio) ;
 			for (int j = 0; j < newColumnsLenght; j++)
 			{
 				// Get the X coordinate of the real world out of the robot grid y index.
-				int realWorldX = ((int)(j * roboWorldRatio));
+				double realWorldX = (j * roboWorldRatio);
 
 				// Indicates the real world grid location
 				Location temLocation = Location(realWorldX, realWorldY);

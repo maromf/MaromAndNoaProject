@@ -24,12 +24,9 @@
 
 		// Fix reading BUG
 		for(int i = 0; i < 15; i++) {
-			setOdometry(start, startYaw);
-			invokeRead();
+			setOdometry(start,startYaw);
+			_pc.Read();
 		}
-
-		_lastYaw = fitYaw(_pp.GetYaw());
-		_position = fitLocation(_pp.GetXPos(),_pp.GetYPos());
 
 		return true;
 	}
@@ -38,7 +35,7 @@
 		// TODO Auto-generated destructor stub
 	}
 
-	void Robot::setSpeed(float linear, float angular)
+	void Robot::setSpeed(double linear, double angular)
 	{
 		_pp.SetSpeed(linear, angular);
 	}
@@ -48,7 +45,8 @@
 	}
 
 	void Robot::setLocation(Location* location) {
-		_position = location;
+		_position->setX(location->getX());
+		_position->setY(location->getY());
 	}
 
 	double Robot::getX()
@@ -77,12 +75,12 @@
 	}
 
 
-	Location* Robot::fitLocation(int x, int y)
+	Location* Robot::fitLocation(double x, double y)
 	{
 		Location* cur;
 		cur = setLocationRatio(x, y);
-		cur = Utils::NegativeCoordinateLocationToPositive(cur,_map->getWidth(), _map->getHeight());
-		return cur;
+
+		return Utils::NegativeCoordinateLocationToPositive(cur,_map->getWidth(), _map->getHeight());
 	}
 
 	void Robot::setRatio(double ratio) {
@@ -104,7 +102,7 @@
 	}
 
 	Location* Robot::getOdometryLocation() {
-		return fitLocation(getX(), getY());
+		return fitLocation(_pp.GetXPos(), _pp.GetYPos());
 	}
 
 	double Robot::getOdometryYaw() {
@@ -128,17 +126,20 @@
 	}
 
 	bool Robot::isAt(Location* point, double delta) {
+		cout << "is at, delta - " << _position->getDistance(point) << " , wanted delta- " << delta << endl;
 		return (_position->getDistance(point) <= delta);
 	}
 
 	Location* Robot::setLocationRatio(double x, double y) {
-		double newX = (x * Utils::METER_TO_CM) / (_robotRatio * 10);
-		double newY = (y * Utils::METER_TO_CM) / (_robotRatio * 10);
+		double ratioX = (x * Utils::METER_TO_CM) / (_robotRatio * 10);
+		double ratioY = (y * Utils::METER_TO_CM) / (_robotRatio * 10);
+		int newX = (ratioX < 0)?(ceil(ratioX)):(floor(ratioX));
+		int newY = (ratioX < 0)?(ceil(ratioY)):(floor(ratioY));
 		Location* location = new Location(newX, newY);
 		return location;
 	}
 
-	double Robot::reversFromRobotRatio(int pos) {
+	double Robot::reversFromRobotRatio(double pos) {
 		double newPos = (pos / 10);
 		return newPos;
 	}

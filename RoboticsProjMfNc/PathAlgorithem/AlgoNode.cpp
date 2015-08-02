@@ -50,8 +50,8 @@ int AlgoNode::recorsiveHGrade(Location* end) {
 	else if (end->getX() == _currentPosition->getX())
 		return abs(end->getY() - _currentPosition->getY()) * DIRECT_MOV_SCORE;
 	else {
-		int tempX = _currentPosition->getX() + (end->getX() > _currentPosition->getX())?1:-1;
-		int tempY = _currentPosition->getY() + (end->getY() > _currentPosition->getX())?1:-1;
+		double tempX = _currentPosition->getX() + (end->getX() > _currentPosition->getX())?1:-1;
+		double tempY = _currentPosition->getY() + (end->getY() > _currentPosition->getX())?1:-1;
 		Location* temp = new Location(tempX,tempY);
 	    return (recorsiveHGrade(temp) + DIAGONAL_MOV_SCORE);
 	}
