@@ -35,7 +35,7 @@ bool Manager::initialize() {
 
 	_points = wP->getWaypoint();
 
-	_localization = new LocalizationManager();
+	_localization = new LocalizationManager(_map, _robot->getYaw());
 
 	_roboManager = new RobotManager(_robot, _map, _localization, _points);
 	return (_path.size() != 0);

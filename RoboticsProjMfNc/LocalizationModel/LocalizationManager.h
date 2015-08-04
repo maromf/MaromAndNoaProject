@@ -10,19 +10,26 @@
 
 #include "Particle.h"
 #include <vector>
-using namespace std;
+#include <algorithm>
+#include <queue>
 
+using namespace std;
 
 class LocalizationManager {
 private:
-    std::vector<Particle*> _particles;
+	static const int PARTICLE_NUM = 50;
+	static const float BELIEF_THRESHOLD = 0.4;
+	priority_queue<Particle*> particles;
+	void deleteUnreliableParticles(double minBelife);
+	bool isGoodNeighbour(Location* neighbourLoc);
+	Map* grid;
+	void FilterParticles();
 
 public:
-	LocalizationManager();
-	void update(double deltaX, double deltaY, double deltaYaw);
-	void resampleParticles();
-	//Particle *getBestParticle();
-
+	LocalizationManager(Map* gridMap, double yawRobot);
+	void updateAll(Location* delta, double yawDelta, double* laserScan, Location* nextLocation);
+	void FillParticlesWithNewMutations();
+	Location* GetProbablyPosition();
 	virtual ~LocalizationManager();
 };
 

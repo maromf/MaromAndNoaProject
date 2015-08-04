@@ -8,27 +8,49 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
 
-#include "../Map.h"
+#include <cmath>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <vector>
+#include "../Framework/Location.h"
+#include "../Map.h"
+#include "../Robot.h"
+#include "../ConfigManager.h"
+//#include "../Utils/AngleHelper.h"
 
 using namespace std;
 
 class Particle {
 private:
-	double _xPos, _yPos, _yaw;
-	double _bel;
-	Map* _map;
-
-	double ProbByMesu(std::vector<double> laserScan);
+	static const double NRMALIZATION = 1.5;
+	Location* position;
+	double belief;
+	double yaw;
+	double probByMov(Location* position, double yawDelta);
+	double prodByScan(Location* delta, double laser[], Map* grid);
+	static const float MAX_DISTANCE = 100;
+	static const float MAX_YAW = 8;
 
 public:
-	Particle(double xPos, double yPos, double yaw, Map* map);
+	Particle();
+	Particle(double x, double y, double yaw);
+	void setPositionDelta(Location* nextLocation, Location* delta, double yawDelta);
+	void Update(Location* position, double yawDelta, double laser[], Map* grid, Location* nextLocation);
 	double getBelief();
-	void update(double deltaX, double deltaY, double deltaYaw, std::vector<double> laserArr);
-
-	//void printPosition();
+	Location* getPosition();
+	double getYaw();
+	double modDouble(double first, double second);
 	virtual ~Particle();
+
+	static double getXDelta(double degree, double distance);
+	static double getYDelta(double degree, double distance);
+	static double indexToRadians(int index);
+
+	virtual bool operator<(const Particle& secondParticle) const;
 };
 
 
 #endif /* PARTICLE_H_ */
+
+

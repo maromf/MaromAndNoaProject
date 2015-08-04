@@ -20,16 +20,16 @@
 
 using namespace std;
 class Map {
-
-	static const int FREE_CELL = 0;
-	static const int OCCUPIED_CELL = 1;
-	static const int UNKNOWN_CELL = 2;
-	static const int PATH_CELL = 3;
-	static const int WAY_POINT_CELL = 4;
-	static const int START_CELL = 5;
-	static const int END_CELL = 6;
-
 	public:
+
+		static const int FREE_CELL = 0;
+		static const int OCCUPIED_CELL = 1;
+		static const int UNKNOWN_CELL = 2;
+		static const int PATH_CELL = 3;
+		static const int WAY_POINT_CELL = 4;
+		static const int START_CELL = 5;
+		static const int END_CELL = 6;
+
 		Map(const char* path);            // Ctor
 		virtual ~Map();   // Dtor
 
@@ -109,6 +109,20 @@ class Map {
 		void setStartAndEnd(Location* start, Location* end);
 
 		void setWayPoints(std::vector<Location*> wayPoints);
+
+		Grid* getRobotWorldGrid();
+
+		vector<Location*> getNeighbours(Location* location);
+
+		/**
+		 * The function return if the getting location is in bound
+		 */
+		bool inBounds(Location* location);
+
+		/**
+		 * The function return if the getting location is blocked
+		 */
+		bool passable(Location* location);
 
 private:
 			LoadManager loadManager;

@@ -217,14 +217,16 @@
     void Map::setPath(std::vector<Location*> path) {
 		for(int i = 0; i < path.size(); i++)
 		{
-			RoboWorldGrid->setCellState(path[i]->getX(),path[i]->getY(), PATH_CELL);
+			Location* cur = path[i];
+			RoboWorldGrid->setCellState(cur->getX(),cur->getY(), PATH_CELL);
 		}
     }
 
     void Map::setWayPoints(std::vector<Location*> wayPoints) {
 		for(int i = 0; i < wayPoints.size(); i++)
 		{
-			RoboWorldGrid->setCellState(wayPoints[i]->getX(),wayPoints[i]->getY(), WAY_POINT_CELL);
+			Location* cur = wayPoints[i];
+			RoboWorldGrid->setCellState(cur->getX(),cur->getY(), WAY_POINT_CELL);
 		}
     }
 
@@ -250,9 +252,46 @@
 
 	}
 
+	Grid* Map::getRobotWorldGrid()
+	{
+		return RoboWorldGrid;
+	}
+
 	void Map::printToPng(Grid* grid, const char* file) {
 
 		loadManager.SaveImgFromGrid(grid,file);
+	}
+
+	vector<Location*> Map::getNeighbours(Location* location)
+	{
+		vector<Location*> neighbours;
+		for( int i = location->getX() - 1; i <= location->getX() + 1; ++i ){
+		   for( int j = location->getY() - 1; j <= location->getY() + 1; ++j ){
+			   Location* next = new Location(i,j);
+			   if (inBounds(next) && passable(next) && (location != next))
+			   {
+				   neighbours.push_back(next);
+			   }
+		   }
+		}
+
+		return neighbours;
+	}
+
+	/**
+	 * The function return if the getting location is in bound
+	 */
+	bool Map::inBounds(Location* location){
+	  return 0 <= location->getX() && location->getX() < getHeight() && 0 <= location->getY() && location->getY() < getWidth();
+	}
+
+	/**
+	 * The function return if the getting location is blocked
+	 */
+	bool Map::passable(Location* location){
+		if (RoboWorldGrid->getCellState(location->getX(), location->getY()) == OCCUPIED_CELL)
+				return false;
+			return true;
 	}
 
 	Map::~Map() {
