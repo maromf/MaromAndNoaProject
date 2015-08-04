@@ -22,23 +22,36 @@ private:
 	Location* _goal;                    // The goal point
 	double _yaw;                        // The angel to the goal point
 
-	MoveForward* _moveForward;
-	Turn* _turn;
+	MoveForward* _moveForward;          // The move forward behavior
+	Turn* _turn;                        // The turn behavior
 
 public:
 	GoTo(Robot* robot, LocalizationManager* localManager, Location* goal); // Ctor
 	virtual ~GoTo();
 
 	/**
-	    Returns the X coordinate.
-
-	    @return The X coordinate (int).
+	    Determines if the Behavior can start operating.
 	*/
 	virtual bool startCond();
+
+	/**
+	    Determines if the Behavior needs to stop.
+	*/
 	virtual bool stopCond();
+
+	/**
+	    Operating the turn and then the movement in order to get to the point..
+	*/
 	virtual void action();
 
+	/**
+	 * Initialize the behavior and the turn and move forward.
+	 */
 	void initializeBehaviors();
+
+	/**
+	    Determines if the reached the goal location.
+	*/
 	bool atGoalLocation();
 };
 

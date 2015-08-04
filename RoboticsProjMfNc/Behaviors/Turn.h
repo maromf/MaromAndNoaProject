@@ -1,8 +1,11 @@
-/*
+/**
  * Turn.h
  *
- *  Created on: Jul 25, 2015
- *      Author: colman
+ *  Purpose: representing the Behavior of turning in place.
+
+ *  Created on: Jul 24, 2015
+ *  @author:    MaromF NoaC
+ *  @version:   1.0
  */
 
 #ifndef TURN_H_
@@ -15,14 +18,29 @@
 
 class Turn : public Behavior {
 private:
-	float _yaw;
+	double _yaw;  // the needed angle to reach
 public:
-	Turn(Robot * robot, float yaw);
+	Turn(Robot * robot, double yaw);
 
+
+	/**
+	    Determines if the Behavior can start operating.
+	*/
 	virtual bool startCond();
+
+	/**
+	    Determines if the Behavior needs to stop.
+	*/
 	virtual bool stopCond();
+
+	/**
+	    Operating the turn.
+	*/
 	virtual void action();
 
+	/**
+	    Determines if the robot reached the needed angle.
+	*/
 	bool inPosition();
 };
 
