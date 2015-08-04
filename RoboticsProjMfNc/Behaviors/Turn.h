@@ -22,6 +22,7 @@ private:
 public:
 	Turn(Robot * robot, double yaw);
 
+	void setYaw(double yaw);
 
 	/**
 	    Determines if the Behavior can start operating.

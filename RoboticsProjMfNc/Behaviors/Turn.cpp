@@ -11,6 +11,11 @@
 #include "Turn.h"
 
 Turn::Turn(Robot *robot, double yaw) : Behavior(robot) {
+	setYaw(yaw);
+}
+
+void Turn::setYaw(double yaw)
+{
 	_yaw = yaw;
 }
 

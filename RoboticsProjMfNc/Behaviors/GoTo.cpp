@@ -55,7 +55,7 @@ void GoTo::action()
 			// While not reach the goal angle
 			while (!_turn->stopCond())
 			{
-
+				NormalizeLocation();
 				// Turn the robot
 				_turn->action();
 			}
@@ -80,6 +80,40 @@ void GoTo::action()
 			_robot->setSpeed((double) 0, (double) 0);
 		}
 	}
+}
+
+void GoTo::NormalizeLocation() {
+	Location* prevLocation = _localManager->GetProbablyPosition();
+	double deltaX = abs(prevLocation->getX() - _robot->getCurrentLocation()->getX());
+	double deltaY = abs(prevLocation->getY() - _robot->getCurrentLocation()->getY());
+	Location* deltaLocation = new Location(deltaX, deltaY);
+
+	double probYawDelta = abs(_localManager->GetProbablyYaw() - _robot->getYaw())
+	_localManager->updateAll(deltaLocation, probYawDelta,  _robot->getLaserScan() , _goal);
+	_robot->invokeRead();
+	Location* probRobotLocation = _localManager->GetProbablyPosition();
+	_normalizeLocation = probRobotLocation;
+	_normalizeDistance = _normalizeLocation->getDistance(_robot->getCurrentLocation());
+
+	printProbLocation();
+
+	_yaw = Utils::calcYaw(_normalizeLocation, _goal);
+	_turn->setYaw(_yaw);
+
+	_robot->invokeRead();
+	_robot->setOdometry(_normalizeLocation , _localManager->GetProbablyYaw());
+	_robot->invokeRead();
+
+	// sets the robot location.
+	_robot->setLocation(_robot->getOdometryLocation());
+
+	_robot->invokeRead();
+
+	_robot->setYaw(_robot->getOdometryYaw());
+}
+
+void GoTo::printProbLocation() {
+	cout << "position: " << _normalizeLocation-> getX() << "," << _normalizeLocation-> getY() << endl;
 }
 
 void GoTo::initializeBehaviors()

@@ -25,6 +25,10 @@ private:
 	MoveForward* _moveForward;          // The move forward behavior
 	Turn* _turn;                        // The turn behavior
 
+	void NormalizeLocation();
+
+	void printProbLocation();
+
 public:
 	GoTo(Robot* robot, LocalizationManager* localManager, Location* goal); // Ctor
 	virtual ~GoTo();

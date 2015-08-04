@@ -43,14 +43,14 @@ double Particle::probByMov(Location* delta, double yawDelta){
 /*
  *  The function calculate the probability according to laser scans
  */
-double Particle::prodByScan(Location* delta, double laser[], Map* grid)
+double Particle::prodByScan(Location* delta, std::vector<double>* laser, Map* grid)
 {
 	double gridres = ConfigManager::Instance()->getGridResulotionCM();
 	float distance = sqrt(pow(delta->getX() * gridres, 2) + pow(delta->getY() * gridres, 2));
 	int errors = 0;
 
 	for (int i = 0; i < READINGS_NUM; i++) {
-		double laserDistance = laser[i] * gridres;
+		double laserDistance = laser->at(i) * gridres;
 		double laserInRadians = indexToRadians(i);
 		int row = position->getX() + round(getXDelta(yaw + laserInRadians, laserDistance));
 		int col = position->getY() + round(getYDelta(yaw + laserInRadians, laserDistance));
@@ -109,7 +109,7 @@ void Particle::setPositionDelta(Location* nextLocation, Location* delta, double 
 /**
  * The function update the current particle. set the belief and positionDelta
  */
-void Particle::Update(Location* delta, double yawDelta, double laser[], Map* grid, Location* nextLocation)
+void Particle::Update(Location* delta, double yawDelta, std::vector<double>* laser, Map* grid, Location* nextLocation)
 {
 	float predBel = probByMov(delta, yawDelta) * belief;
 	belief = NRMALIZATION * prodByScan(delta,laser, grid) * predBel;
@@ -166,42 +166,5 @@ double Particle::indexToRadians(int index)
 
 Particle::~Particle() {}
 
-/*Particle::Particle(double xPos, double yPos, double yaw, Map* map) {
-	_bel = 0;
-	_yaw = 0;
-	_xPos = 0;
-	_yPos = 0;
-	_map = map;
-}
-
-double Particle::getBelief() {
-   return _bel;
-}
-
-void Particle::update(double deltaX, double deltaY, double deltaYaw, std::vector<double> laserArr) {
-	_xPos += deltaX;
-	_yPos += deltaY;
-	_yaw += deltaYaw;
-
-   // _predBel = _bel * predByMov(deltaX,deltaY,deltaYaw);
-  // _bel = normalVal * predBel * ProbByMesu(laserArr);
-}
-
-double Particle::ProbByMesu(std::vector<double> laserScan) {
-	int expectedObsticlesDetected = 0;
-
-	for (unsigned int laserDegree = 0; laserDegree < laserScan.size(); laserDegree += 4) {
-		double currentLaserScan = laserScan[laserDegree];
-
-	//	if (isObsticleDetectedAsExpected(currentLaserScan, laserDegree))
-	//		expectedObsticlesDetected++;
-	}
-
-	return expectedObsticlesDetected / (laserScan.size() / 4);
-}
-
-Particle::~Particle() {
-	// TODO Auto-generated destructor stub
-}*/
 
 

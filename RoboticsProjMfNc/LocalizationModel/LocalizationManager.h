@@ -27,9 +27,10 @@ private:
 
 public:
 	LocalizationManager(Map* gridMap, double yawRobot);
-	void updateAll(Location* delta, double yawDelta, double* laserScan, Location* nextLocation);
+	void updateAll(Location* delta, double yawDelta, std::vector<double>* laserScan, Location* nextLocation);
 	void FillParticlesWithNewMutations();
 	Location* GetProbablyPosition();
+	double GetProbablyYaw();
 	virtual ~LocalizationManager();
 };
 

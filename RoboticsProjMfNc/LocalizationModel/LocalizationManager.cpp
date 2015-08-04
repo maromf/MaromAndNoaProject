@@ -35,7 +35,7 @@ LocalizationManager::LocalizationManager(Map* gridMap, double yawRobot) {
 /**
  * The function passing the all particles, update them, filtered and fill with childrens
  */
-void LocalizationManager::updateAll(Location* delta, double yawDelta, double* laserScan, Location* nextLocation){
+void LocalizationManager::updateAll(Location* delta, double yawDelta, std::vector<double>* laserScan, Location* nextLocation){
 	Particle* tempParticle;
 	priority_queue<Particle*> tempList;
 	int particlesSize = particles.size();
@@ -78,6 +78,10 @@ void LocalizationManager::FilterParticles(){
  */
 Location* LocalizationManager::GetProbablyPosition(){
 	return particles.top()->getPosition();
+}
+
+double LocalizationManager::GetProbablyYaw() {
+	return particles.top()->getYaw();
 }
 
 /**

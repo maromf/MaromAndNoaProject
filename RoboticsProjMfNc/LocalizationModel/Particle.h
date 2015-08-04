@@ -28,7 +28,7 @@ private:
 	double belief;
 	double yaw;
 	double probByMov(Location* position, double yawDelta);
-	double prodByScan(Location* delta, double laser[], Map* grid);
+	double prodByScan(Location* delta, std::vector<double>* laser, Map* grid);
 	static const float MAX_DISTANCE = 100;
 	static const float MAX_YAW = 8;
 
@@ -36,7 +36,7 @@ public:
 	Particle();
 	Particle(double x, double y, double yaw);
 	void setPositionDelta(Location* nextLocation, Location* delta, double yawDelta);
-	void Update(Location* position, double yawDelta, double laser[], Map* grid, Location* nextLocation);
+	void Update(Location* position, double yawDelta, std::vector<double>* laser, Map* grid, Location* nextLocation);
 	double getBelief();
 	Location* getPosition();
 	double getYaw();

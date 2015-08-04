@@ -23,6 +23,8 @@ private:
 
 protected:
 	Robot *_robot;
+	Location* _normalizeLocation;
+	double _normalizeDistance;
 
 public:
 	virtual bool startCond() = 0;
