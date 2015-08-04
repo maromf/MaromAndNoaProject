@@ -25,7 +25,7 @@ public:
 	static const int OCCUPIED_CELL_VALUE = 1;
 
 	Grid(int width, int height); // Ctor
-	Grid(Grid* gridToCopy);
+	Grid(Grid* gridToCopy); // Copy Ctor
 
 	/*
 	 * Get the grid columns number.

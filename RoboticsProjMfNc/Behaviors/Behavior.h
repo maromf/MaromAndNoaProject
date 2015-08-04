@@ -1,3 +1,13 @@
+/**
+ * Behavior.h
+ *
+ *  Purpose: representing the Behavior of the robot on filed ( movment and turn).
+
+ *  Created on: Jul 24, 2015
+ *  @author:    MaromF NoaC
+ *  @version:   1.0
+ */
+
 #ifndef BEHAVIOR_H_
 #define BEHAVIOR_H_
 

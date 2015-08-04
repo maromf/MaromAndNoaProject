@@ -90,7 +90,7 @@
 		int maxRoboSize = (roboSizeX > roboSizeY) ? roboSizeX : roboSizeY;
 
 		// The size of the cells to color around the each occupied cell according to given resolution.
-		int buffer = ceil(maxRoboSize / pixelsResulotion);
+		int buffer = ceil((maxRoboSize / pixelsResulotion) * 1.25);
 
 		// Creating temp grid to run on, to private endless recursive painting on the grid.
 		tempGrid = new Grid(*grid);

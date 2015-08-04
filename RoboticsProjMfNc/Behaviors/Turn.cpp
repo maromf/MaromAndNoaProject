@@ -40,8 +40,16 @@ void Turn::action()
 		leftRightMark = -1;
 	}
 
+	double speed = Utils::FAST_YAW_TURN_DELTA;
+	if(abs(_yaw - _robot->getYaw()) < Utils::FAST_YAW_DELTA) {
+		speed = Utils::MIDDEL_YAW_TURN_DELTA;
+	}
+
+	if(abs(_yaw - _robot->getYaw()) < Utils::MIDDEL_YAW_DELTA) {
+		speed = Utils::SLOW_YAW_TURN_DELTA;
+	}
 	_robot->invokeRead();
-	_robot->setSpeed(0, leftRightMark * Utils::YAW_TURN_DELTA);
+	_robot->setSpeed(0, leftRightMark * speed);
 	_robot->invokeRead();
 	_robot->setYaw(_robot->getOdometryYaw());
 

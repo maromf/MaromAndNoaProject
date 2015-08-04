@@ -21,7 +21,7 @@ using namespace PlayerCc;
 
 	int main(int argc, const char * argv[])
 	{
-		robo = new Robot("localhost", 6665);
+		robo = new Robot("10.10.245.63", 6665);
 		manager = new Manager(robo, ConfigManager::Instance());
 
 		if(manager->initialize()) {

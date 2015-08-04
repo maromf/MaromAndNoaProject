@@ -1,8 +1,12 @@
-/*
+/**
  * GoTo.h
  *
- *  Created on: Jul 26, 2015
- *      Author: colman
+ *  Purpose: representing the Behavior of going to point,
+ *  use the turn behavior and the move forward for getting to point.
+
+ *  Created on: Jul 24, 2015
+ *  @author:    MaromF NoaC
+ *  @version:   1.0
  */
 
 #ifndef GOTO_H_
@@ -14,17 +18,22 @@
 
 class GoTo: public Behavior {
 private:
-	LocalizationManager* _localManager;
-	Location* _goal;
-	double _yaw;
+	LocalizationManager* _localManager; // LocalizationManager
+	Location* _goal;                    // The goal point
+	double _yaw;                        // The angel to the goal point
 
 	MoveForward* _moveForward;
 	Turn* _turn;
 
 public:
-	GoTo(Robot* robot, LocalizationManager* localManager, Location* goal);
+	GoTo(Robot* robot, LocalizationManager* localManager, Location* goal); // Ctor
 	virtual ~GoTo();
 
+	/**
+	    Returns the X coordinate.
+
+	    @return The X coordinate (int).
+	*/
 	virtual bool startCond();
 	virtual bool stopCond();
 	virtual void action();

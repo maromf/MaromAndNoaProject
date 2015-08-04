@@ -53,6 +53,11 @@ public:
 	*/
     void setY(double yCoord);
 
+	/**
+	    Returns the distance of the current location from the given goal location.
+
+	    @return The distance from the given location (double).
+	*/
     double getDistance(Location* b);
 
     /*

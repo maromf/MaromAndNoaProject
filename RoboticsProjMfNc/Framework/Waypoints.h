@@ -1,8 +1,11 @@
-/*
+/**
  * Waypoints.h
  *
- *  Created on: Jul 17, 2015
- *      Author: Noa
+ *  Purpose: generates the optimal way points across the given path, for minimal turning.
+
+ *  Created on: Jun 17, 2015
+ *  @author:    Noa Cohen
+ *  @version:   1.0
  */
 
 #ifndef WAYPOINTS_H_
@@ -17,6 +20,8 @@ private:
 	std::vector<Location*> _waypoints;
 public:
 	Waypoints(std::vector<Location*>* astarVector);
+
+
 	std::vector<Location*> getWaypoint();
 };
 

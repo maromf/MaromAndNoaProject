@@ -17,9 +17,11 @@ class MoveForward : public Behavior {
 	private:
 		//bool checkObstacleInFront();
 		Location* _goal;
+		double _lastD;
 
 		bool checkObstacles();
 		bool atGoalLocation();
+		bool checkIfDistanceIncrees();
 
 	public:
 		MoveForward(Robot *robot, Location *goal);

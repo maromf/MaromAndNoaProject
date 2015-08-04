@@ -21,12 +21,20 @@ public:
 	static const double TOTAL_SCAN_SPAN = 666;
 	static const double TOTAL_DEGREES = 240;
 	static const double PAI_DEGREES = 180;
-	static const double COMPROMISED_YAW = 1.5;
+	static const double COMPROMISED_YAW = 0.35;
 	static const double LASER_MAX_DETECTION_RANGE = 4.095;
 	static const double COMPROMISED_DISTANCE = 1.2;
 	static const double MINIMUM_DISTANCE_FROM_WALL = 0.5;
-	static const double YAW_TURN_DELTA = 0.16;
-	static const double MOVEMENT_DELTA = 0.4;
+	static const double FAST_YAW_TURN_DELTA = 0.16;
+	static const double MIDDEL_YAW_TURN_DELTA = 0.053;
+	static const double SLOW_YAW_TURN_DELTA = 0.025;
+	static const double FAST_YAW_DELTA = 20;
+	static const double MIDDEL_YAW_DELTA = 3.5;
+	static const double FAST_FORWARD_SPEED = 0.7;
+	static const double MIDDEL_FORWARD_SPEED = 0.4;
+	static const double SLOW_FORWARD_SPEED = 0.12;
+	static const double FAST_FORWARD_DELTA = 14;
+	static const double MIDDEL_FORWARD_DELTA = 8;
 	static const double WAY_POINT_CONCER_DELTA = 1;
 	static const double METER_TO_CM = 1000;
 

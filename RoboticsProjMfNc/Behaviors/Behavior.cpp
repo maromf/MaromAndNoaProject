@@ -1,3 +1,13 @@
+/**
+ * Behavior.cpp
+ *
+ *  Purpose: representing the Behavior of the robot on filed ( movment and turn).
+
+ *  Created on: Jul 24, 2015
+ *  @author:    MaromF NoaC
+ *  @version:   1.0
+ */
+
 #include "Behavior.h"
 
 	Behavior::Behavior(Robot *robot) : _robot(robot){
