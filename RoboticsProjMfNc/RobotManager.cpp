@@ -32,6 +32,7 @@ bool RobotManager::startRobot(){
 			if (behavior->startCond()) {
 				while (!behavior->stopCond()) {
 					behavior->action();
+					cout << "position: " << _localization->GetProbablyPosition()-> getX() << "," << _localization->GetProbablyPosition()-> getY() << endl;
 				}
 			}
 		}
