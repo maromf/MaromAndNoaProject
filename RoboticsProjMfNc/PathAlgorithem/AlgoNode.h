@@ -1,8 +1,11 @@
-/*
+/**
  * AlgoNode.h
  *
- *  Created on: Jul 16, 2015
- *      Author: colman
+ *  Purpose: representing a node at the grid witch .
+
+ *  Created on: Jul 24, 2015
+ *  @author:    MaromF NoaC
+ *  @version:   1.0
  */
 
 #ifndef ALGONODE_H_

@@ -24,8 +24,3 @@ bool prioritySort::operator() (AlgoNode* a, AlgoNode* b) const {
 		return (a->getGrade() > b->getGrade())?true:false;
 	}
 }
-
-//bool prioritySort::operator() (AlgoNode a, AlgoNode b) const{
-//	return ((a)<(b));
-//}
-

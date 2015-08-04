@@ -7,16 +7,25 @@
 
 #include "Utils.h"
 
+/**
+ * Calculates degrees to grid index
+ */
 int Utils::degreesToIndex(int degrees)
 {
 	return degrees * (TOTAL_SCAN_SPAN / TOTAL_DEGREES);
 }
 
+/**
+ * Calculates grid index to degrees
+ */
 int Utils::indexToDegrees(int index)
 {
 	return index * (TOTAL_DEGREES / TOTAL_SCAN_SPAN);
 }
 
+/**
+ * calculates degrees to radians
+ */
 double Utils::degreesToRadians(double degrees)
 {
 	double yaw = degrees;
@@ -24,6 +33,9 @@ double Utils::degreesToRadians(double degrees)
 	return (yaw * M_PI) / PAI_DEGREES;
 }
 
+/**
+ * calculates radians to degrees
+ */
 double Utils::radiansToDegrees(double radians)
 {
 	double yaw = (radians * PAI_DEGREES) / M_PI;
@@ -31,56 +43,31 @@ double Utils::radiansToDegrees(double radians)
 	return yaw;
 }
 
-//double Utils::calcYaw(Location* curPos, Location* goal)
-//{
-//	double dx = curPos->getX() - goal->getX();
-//	double dy = curPos->getY() - goal->getY();
-//	double n = NegativeYawToPositive(radiansToDegrees(atan2(dx, dy)));
-//	double nn = calculateNeededYaw(curPos, goal);
-//	return nn;
-//}
-
+/**
+ * calculates yaw between two locations
+ * @param curPos - first location
+ * @param goal - second location
+ * @return yaw
+ */
 double Utils::calcYaw(Location* curPos, Location* goal)
 {
-	//double dx = goal->getX() - curPos->getX();
-	//double dy = goal->getY() - curPos->getY();
-	//double angleInDegrees = atan2(dy, dx) * 180 / M_PI;
-	//double angleInDegrees = atan2(curPos->getY() - goal->getY(), curPos->getX() - goal->getX()) * 180 / M_PI;
 	double angleInDegrees = calculateNeededYaw(curPos, goal);
 	return angleInDegrees;
 }
 
-//double Utils::calculateNeededYaw(Location* curPos, Location* goal)
-//{
-//	double yDeltaToPoint = abs(goal->getY() - curPos->getY());
-//	double distanceToPoint = curPos->getDistance(goal);
-//	double neededYaw = acos(yDeltaToPoint / distanceToPoint);
-//
-//	switch(getQuarter(curPos, goal)) {
-//		case FIRST:
-//			return radiansToDegrees(M_PI_2 - neededYaw);
-//		case SECOND:
-//			return radiansToDegrees(M_PI - neededYaw);
-//		case THIRD:
-//			return radiansToDegrees(M_PI + M_PI_2 - neededYaw);
-//		case FOURTH:
-//			return radiansToDegrees(M_PI * 2 - neededYaw);
-//		default:
-//			return neededYaw;
- //  }
-//}
-
+/**
+ * calculates yaw according to quarter- yaw always positive
+ */
 double Utils::calculateNeededYaw(Location* curPos, Location* goal)
 {
 	double yDeltaToPoint = abs(goal->getY() - curPos->getY());
 	double xDeltaToPoint = abs(goal->getX() - curPos->getX());
-	//double distanceToPoint = curPos->getDistance(goal);
-	//double neededYaw = acos(yDeltaToPoint / distanceToPoint);
 
 	double neededYaw = atan2(yDeltaToPoint , xDeltaToPoint);
 	neededYaw = (neededYaw < 0) ? ( ((M_PI * 2) + neededYaw)) : neededYaw;
 	neededYaw = radiansToDegrees(neededYaw);
 
+	// check the quarter of the goal point
 	switch(getQuarter(curPos, goal)) {
 		case FIRST:
 			return neededYaw;
@@ -96,20 +83,9 @@ double Utils::calculateNeededYaw(Location* curPos, Location* goal)
 
 }
 
-//int Utils::getQuarter(Location* pos, Location* goal) {
-//	if (pos->getY() > goal->getY()) {
-//		if (pos->getX() > goal->getX())
-//			return SECOND;
-//		else
-//			return FIRST;
-//	} else {
-//		if (pos->getX() > goal->getX())
-//			return THIRD;
-//		else
-//			return FOURTH;
-//	}
-//}
-
+/**
+ * get quarter of the goal point
+ */
 int Utils::getQuarter(Location* pos, Location* goal) {
 	if (pos->getY() > goal->getY()) {
 		if (pos->getX() > goal->getX())
@@ -124,16 +100,28 @@ int Utils::getQuarter(Location* pos, Location* goal) {
 	}
 }
 
+/**
+ * turn yaw to positive
+ * @return positive yaw
+ */
 double Utils::NegativeYawToPositive(double negative)
 {
 	return (negative < 0) ? ( ((PAI_DEGREES * 2) + negative)) : negative;
 }
 
+/**
+ * turn yaw to negative
+ * @return negative yaw
+ */
 double Utils::PositiveYawToNegative(double positive)
 {
 	return (positive > PAI_DEGREES) ? ((-1) * ((PAI_DEGREES * 2) - positive)) : positive;
 }
 
+/**
+ * turn negative location to positive
+ * @return positive location
+ */
 Location* Utils::NegativeCoordinateLocationToPositive(Location* negative, int width, int height)
 {
 	double posX = negative->getX() + floor(width / 2);
@@ -141,6 +129,10 @@ Location* Utils::NegativeCoordinateLocationToPositive(Location* negative, int wi
 	return new Location(posX, posY);
 }
 
+/**
+ * turn positive location to negative
+ * @return negative location
+ */
 Location* Utils::PositiveCoordinateLocationToNegative(Location* positive, int width, int height)
 {
 	double posX = positive->getX() - (width / 2);

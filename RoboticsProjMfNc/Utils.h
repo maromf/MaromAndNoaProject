@@ -15,6 +15,8 @@
 using namespace std;
 
 class Utils {
+private:
+	static double calculateNeededYaw(Location* curPos, Location* goal);
 public:
 	enum Quarter {FIRST = 1, SECOND, THIRD, FOURTH};
 
@@ -43,7 +45,6 @@ public:
 	static double degreesToRadians(double degrees);
 	static double radiansToDegrees(double radians);
 	static double calcYaw(Location* curPos, Location* goal);
-	static double calculateNeededYaw(Location* curPos, Location* goal);
 	static int getQuarter(Location* pos, Location* goal);
 	static double NegativeYawToPositive(double negative);
 	static double PositiveYawToNegative(double positive);

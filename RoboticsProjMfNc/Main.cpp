@@ -18,14 +18,19 @@ using namespace PlayerCc;
 	Manager* manager;
 	Robot* robo;
 
-
 	int main(int argc, const char * argv[])
 	{
+		// initialize robot and the main manager
 		robo = new Robot("10.10.245.63", 6665);
 		manager = new Manager(robo, ConfigManager::Instance());
 
-		if(manager->initialize()) {
-			if(manager->startRuning()) {
+		// check if there is path
+		if(manager->initialize())
+		{
+			// check if can start running and run
+			if(manager->startRuning())
+			{
+				// draw the path into a file
 				manager->finish("Player/FinalPath.png");
 				cout << "Running was ended successfully!";
 			} else {
@@ -37,10 +42,6 @@ using namespace PlayerCc;
 
 		return 0;
 	}
-
-
-
-
 
 
 

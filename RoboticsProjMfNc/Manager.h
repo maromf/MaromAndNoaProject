@@ -26,7 +26,7 @@ using namespace std;
 
 class Manager {
 public:
-	Manager(Robot* robot, ConfigManager* config);
+	Manager(Robot* robot, ConfigManager* config); // ctor
 	bool initialize();
 	bool startRuning();
 	void finish(const char* file);
